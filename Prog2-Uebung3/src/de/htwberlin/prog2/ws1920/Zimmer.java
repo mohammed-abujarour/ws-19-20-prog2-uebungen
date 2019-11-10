@@ -33,16 +33,6 @@ public abstract class Zimmer {
 		this.capacity = capacity;
 	}
 
-	public boolean book(int day) {
-		
-		if(bookings[day] == true) {
-			return false;
-		}
-		else {
-			bookings[day] = true;
-			return true;
-		}
-	}
 
 
 	@Override
