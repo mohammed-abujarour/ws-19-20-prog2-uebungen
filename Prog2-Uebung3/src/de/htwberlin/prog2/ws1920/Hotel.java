@@ -8,16 +8,16 @@ public class Hotel {
 	private int capacity;
 	
 	private Guest guests [];
-	private Zimmer zimmerList [];
+	private IBuchbar zimmerList [];
 	
 	public Hotel(String name, int capacity, int numberOfRooms) {
 		this.name = name;
 		this.capacity = capacity;
-		this.zimmerList = new Zimmer[numberOfRooms];
+		this.zimmerList = new IBuchbar[numberOfRooms];
 	}
 	
 	
-	public boolean addZimmer(Zimmer zimmer) {
+	public boolean addZimmer(IBuchbar zimmer) {
 		for(int i = 0; i < zimmerList.length; i++) {
 			if(zimmerList[i] == null) {
 				zimmerList[i] = zimmer;
@@ -29,18 +29,21 @@ public class Hotel {
 	}
 	
 	public Zimmer suchen(String number) {
-		for (Zimmer zimmer : zimmerList) {
+		for (IBuchbar buchbar : zimmerList) {
+			if(buchbar instanceof Zimmer) {
+				Zimmer zimmer = (Zimmer) buchbar;
 			if(zimmer.getNumber().equals(number))
 				return zimmer;
+			}
 		}
 		return null;
 	}
 	
 	public Zimmer einZimmerBuchen(int day) {
 		
-		for(Zimmer zimmer : zimmerList) {
-			if(zimmer.book(day))
-				return zimmer;
+		for(IBuchbar zimmer : zimmerList) {
+			if(zimmer.buchen (day))
+				return (Zimmer) zimmer;
 		}
 		
 		return null;

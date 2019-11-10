@@ -23,14 +23,29 @@ public class Starter {
 		motelOne.addGuest(anna);
 		
 		
-		Zimmer zimmer1 = new Einzelzimmer("001");
+		Einzelzimmer zimmer1 = new Einzelzimmer("001");
 		Zimmer zimmer2 = new Dopplezimmer("002");
 		
 		motelOne.addZimmer(zimmer1);
-		motelOne.addZimmer(zimmer2);
+		//motelOne.addZimmer(zimmer2); //geht nicht
 		
 		System.out.println(motelOne);
+		
+		Office office = new Office("off-123");
+		//office.buchen(20); //geht nicht
+		zimmer1.buchen(19);
+		
+		Fahrrad bike1 = new Fahrrad();
+		bike1.buchen(20);
 //		System.out.println(zimmer1);
 //		System.out.println(zimmer2);
+	}
+	
+	public double checkout(IBuchbar [] buchungen) {
+		
+		double summe = 0;
+		for(IBuchbar buchbar: buchungen)
+			summe += 1; // buchbar.getPreis();
+		return summe;
 	}
 }
