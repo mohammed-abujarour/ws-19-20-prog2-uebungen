@@ -2,6 +2,8 @@ package de.htwberlin.prog2.ws1920;
 
 import java.util.Date;
 
+import de.htwberlin.prog2.ws1920.extern.Wallet;
+
 public class Guest {
 	
 	private String name;
@@ -10,10 +12,13 @@ public class Guest {
 	private Address privateAdresse;
 	private Address businessAdresse;
 	private Reservation reservations [];
+	private Wallet<IBuchbar> bookingHistory;
+	private Wallet<Payment> paymentHistory;
 	
 	public Guest(String name) {
 		this.name = name;
 		this.reservations = new Reservation[5];
+		bookingHistory = new Wallet<>();
 	}
 	
 	public void setPrivateAdresse(Address privateAdresse) {
@@ -40,6 +45,21 @@ public class Guest {
 		return this.reservations;
 	}
 	
+	public void addReservation (Reservation reservation) {
+		for(int i=0; i< this.reservations.length; i++)
+			if(this.reservations[i] == null) {
+				this.reservations[i] = reservation;
+				bookingHistory.store(reservation.getBookedItem());
+			}
+		
+	}
+	/**
+	 * @return the bookingHistory
+	 */
+	public Wallet<IBuchbar> getBookingHistory() {
+		return bookingHistory;
+	}
+
 	public String toString() {
 		return "Guest [name=" + name + ", privateAdresse=" + privateAdresse + ", businessAdresse=" + businessAdresse
 				+ "]";
