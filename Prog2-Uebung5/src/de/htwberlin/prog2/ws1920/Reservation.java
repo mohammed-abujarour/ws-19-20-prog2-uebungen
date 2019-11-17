@@ -6,10 +6,12 @@ public class Reservation {
 	private String notes;
 	private String from;
 	private String to;
+	private Guest guest;
 	
 	
-	public Reservation(IBuchbar bookedItem, String from, String to) {
+	public Reservation(IBuchbar bookedItem, Guest guest, String from, String to) {
 		this.bookedItem = bookedItem;
+		this.setGuest(guest);
 		this.from = from;
 		this.to = to;
 	}
@@ -41,6 +43,21 @@ public class Reservation {
 
 	public String getFrom() {
 		return from;
+	}
+
+	/**
+	 * @return the guest
+	 */
+	public Guest getGuest() {
+		return guest;
+	}
+
+	/**
+	 * @param guest the guest to set
+	 */
+	public void setGuest(Guest guest) {
+		if(guest != null)
+			this.guest = guest;
 	}
 
 	@Override
