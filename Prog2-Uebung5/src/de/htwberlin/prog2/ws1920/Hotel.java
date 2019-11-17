@@ -7,7 +7,6 @@ public class Hotel {
 	private Address location;
 	private int capacity;
 	
-	private Guest guests [];
 	private IBuchbar zimmerList [];
 	
 	public Hotel(String name, int capacity, int numberOfRooms) {
@@ -76,13 +75,6 @@ public class Hotel {
 		this.capacity = capacity;
 	}
 
-	public Guest[] getGuests() {
-		return guests;
-	}
-
-	public void setGuests(Guest[] guests) {
-		this.guests = guests;
-	}
 
 	public Address getLocation() {
 		return location;
@@ -95,7 +87,7 @@ public class Hotel {
 
 	@Override
 	public String toString() {
-		return "Hotel [name=" + name + ", location=" + location + ", capacity=" + capacity + ", guests="
-				+ Arrays.toString(guests) + ", zimmerList=" + Arrays.toString(zimmerList) + "]";
+		return "Hotel [name=" + name + ", location=" + location + ", capacity=" + capacity 
+				 + ", zimmerList=" + Arrays.toString(zimmerList) + "]";
 	}
 }
