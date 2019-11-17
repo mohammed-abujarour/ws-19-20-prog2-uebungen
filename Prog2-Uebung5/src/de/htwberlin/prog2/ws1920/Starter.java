@@ -17,7 +17,7 @@ public class Starter {
 		System.out.println(matt);
 		System.out.println(anna);
 		
-		Hotel motelOne = new Hotel("MotelOne", 100, 200);
+		Hotel motelOne = new Hotel("MotelOne");
 		motelOne.setLocation(new Address("Invalidenstr.", "67", "10557", "Berlin"));
 		motelOne.addGuest(matt);
 		motelOne.addGuest(anna);

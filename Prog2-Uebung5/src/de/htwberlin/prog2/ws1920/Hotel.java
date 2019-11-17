@@ -1,34 +1,27 @@
 package de.htwberlin.prog2.ws1920;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Hotel {
 	private String name;
 	private Address location;
-	private int capacity;
 	
-	private IBuchbar zimmerList [];
+	private List<IBuchbar> services;
 	
-	public Hotel(String name, int capacity, int numberOfRooms) {
+	public Hotel(String name) {
 		this.name = name;
-		this.capacity = capacity;
-		this.zimmerList = new IBuchbar[numberOfRooms];
+		this.services = new ArrayList<>();
 	}
 	
 	
 	public boolean addZimmer(IBuchbar zimmer) {
-		for(int i = 0; i < zimmerList.length; i++) {
-			if(zimmerList[i] == null) {
-				zimmerList[i] = zimmer;
-			return true;
-			}
-		}
 		
-		return false;
+		return services.add(zimmer);
 	}
 	
 	public Zimmer suchen(String number) {
-		for (IBuchbar buchbar : zimmerList) {
+		for (IBuchbar buchbar : services) {
 			if(buchbar instanceof Zimmer) {
 				Zimmer zimmer = (Zimmer) buchbar;
 			if(zimmer.getNumber().equals(number))
@@ -40,7 +33,7 @@ public class Hotel {
 	
 	public Zimmer einZimmerBuchen(int day) {
 		
-		for(IBuchbar zimmer : zimmerList) {
+		for(IBuchbar zimmer : services) {
 			if(zimmer.buchen (day))
 				return (Zimmer) zimmer;
 		}
@@ -67,15 +60,6 @@ public class Hotel {
 		this.name = name;
 	}
 
-	public int getCapacity() {
-		return capacity;
-	}
-
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
-	}
-
-
 	public Address getLocation() {
 		return location;
 	}
@@ -87,7 +71,7 @@ public class Hotel {
 
 	@Override
 	public String toString() {
-		return "Hotel [name=" + name + ", location=" + location + ", capacity=" + capacity 
-				 + ", zimmerList=" + Arrays.toString(zimmerList) + "]";
+		return "Hotel [name=" + name + ", location=" + location 
+				 + ", zimmerList=" + services + "]";
 	}
 }
