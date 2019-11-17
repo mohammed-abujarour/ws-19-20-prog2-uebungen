@@ -19,8 +19,6 @@ public class Starter {
 		
 		Hotel motelOne = new Hotel("MotelOne");
 		motelOne.setLocation(new Address("Invalidenstr.", "67", "10557", "Berlin"));
-		motelOne.addGuest(matt);
-		motelOne.addGuest(anna);
 		
 		
 		Einzelzimmer zimmer1 = new Einzelzimmer("001");

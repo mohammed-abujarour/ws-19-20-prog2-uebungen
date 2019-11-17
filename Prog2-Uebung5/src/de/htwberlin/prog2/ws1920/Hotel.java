@@ -41,24 +41,14 @@ public class Hotel {
 		return null;
 	}
 	
-	public boolean addGuest(Guest guest) {
-		// ... 
-		return true;
-	}
 
-	public boolean removeGuest(Guest guest) {
-		//...
-		
-		return true;
-	}
+
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	
 
 	public Address getLocation() {
 		return location;
