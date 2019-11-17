@@ -1,5 +1,7 @@
 package de.htwberlin.prog2.ws1920;
 
+import java.time.LocalDateTime;
+
 public class Starter {
 
 	public static void main(String[] args) {
@@ -24,19 +26,18 @@ public class Starter {
 		Einzelzimmer zimmer1 = new Einzelzimmer("001");
 		Zimmer zimmer2 = new Dopplezimmer("002");
 		
-		motelOne.addZimmer(zimmer1);
+		motelOne.addService(zimmer1);
 		//motelOne.addZimmer(zimmer2); //geht nicht
 		
 		System.out.println(motelOne);
 		
 		Office office = new Office("off-123");
 		//office.buchen(20); //geht nicht
-		zimmer1.buchen(19);
+		
+		zimmer1.buchen(LocalDateTime.now(), LocalDateTime.now().plusDays(3));
 		
 		Fahrrad bike1 = new Fahrrad();
-		bike1.buchen(20);
-//		System.out.println(zimmer1);
-//		System.out.println(zimmer2);
+		bike1.buchen(LocalDateTime.now(), LocalDateTime.now().plusHours(4));
 	}
 	
 	public double checkout(IBuchbar [] buchungen) {

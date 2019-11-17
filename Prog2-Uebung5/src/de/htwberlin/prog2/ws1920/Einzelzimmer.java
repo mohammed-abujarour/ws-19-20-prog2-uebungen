@@ -1,5 +1,7 @@
 package de.htwberlin.prog2.ws1920;
 
+import java.time.LocalDateTime;
+
 public class Einzelzimmer extends Zimmer implements IBuchbar {
 	private boolean[] bookings = new boolean[365];
 
@@ -9,15 +11,9 @@ public class Einzelzimmer extends Zimmer implements IBuchbar {
 	}
 
 	@Override
-	public boolean buchen(int day) {
+	public boolean buchen(LocalDateTime from, LocalDateTime to) {
 		
-		if(bookings[day] == true) {
-			return false;
-		}
-		else {
-			bookings[day] = true;
-			return true;
-		}
+		return false;
 	
 	}
 

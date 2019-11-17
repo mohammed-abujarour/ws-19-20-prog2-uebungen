@@ -1,5 +1,7 @@
 package de.htwberlin.prog2.ws1920;
 
+import java.time.LocalDateTime;
+
 public class Dopplezimmer extends Zimmer implements IBuchbar {
 
 	private boolean seperatedBeds ;
@@ -22,11 +24,11 @@ public class Dopplezimmer extends Zimmer implements IBuchbar {
 	}
 
 	@Override
-	public boolean buchen(int day) {
-		// TODO Auto-generated method stub
+	public boolean buchen(LocalDateTime from, LocalDateTime to) {
+
 		return false;
 	}
-	
+
 	
 
 }

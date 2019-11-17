@@ -1,5 +1,6 @@
 package de.htwberlin.prog2.ws1920;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +15,7 @@ public class Hotel {
 		this.services = new ArrayList<>();
 	}
 	
-	
-	public boolean addZimmer(IBuchbar zimmer) {
+	public boolean addService(IBuchbar zimmer) {
 		
 		return services.add(zimmer);
 	}
@@ -31,11 +31,11 @@ public class Hotel {
 		return null;
 	}
 	
-	public Zimmer einZimmerBuchen(int day) {
+	public Zimmer einZimmerBuchen(LocalDateTime from, LocalDateTime to) {
 		
-		for(IBuchbar zimmer : services) {
-			if(zimmer.buchen (day))
-				return (Zimmer) zimmer;
+		for(IBuchbar service : services) {
+			if(service.buchen (from, to))
+				return (Zimmer) service;
 		}
 		
 		return null;
