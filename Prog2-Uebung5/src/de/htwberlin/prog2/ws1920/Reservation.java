@@ -1,17 +1,23 @@
 package de.htwberlin.prog2.ws1920;
 
+import java.time.LocalDateTime;
+
 public class Reservation {
 	
 	private IBuchbar bookedItem;
 	private String notes;
-	private String from;
-	private String to;
+	private LocalDateTime from;
+	private LocalDateTime to;
 	private Guest guest;
 	
 	
-	public Reservation(IBuchbar bookedItem, Guest guest, String from, String to) {
+	public Reservation(IBuchbar bookedItem, Guest guest, LocalDateTime from, LocalDateTime to) throws Exception {
 		this.bookedItem = bookedItem;
+		if(guest == null)
+			throw new Exception("Invlid Input - Guest cannot be null");
 		this.setGuest(guest);
+		if(from.isAfter(to))
+			throw new Exception("Invalid Input - " + from + " must be before " + to);
 		this.from = from;
 		this.to = to;
 	}
@@ -26,12 +32,12 @@ public class Reservation {
 	}
 
 
-	public String getTo() {
+	public LocalDateTime getTo() {
 		return to;
 	}
 
 
-	public void setTo(String to) {
+	public void setTo(LocalDateTime to) {
 		this.to = to;
 	}
 
@@ -41,7 +47,8 @@ public class Reservation {
 	}
 
 
-	public String getFrom() {
+	
+	public LocalDateTime getFrom() {
 		return from;
 	}
 
