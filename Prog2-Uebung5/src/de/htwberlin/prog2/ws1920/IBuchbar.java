@@ -4,5 +4,7 @@ import java.time.LocalDateTime;
 
 public interface IBuchbar {
 
-	public boolean buchen(LocalDateTime from, LocalDateTime to);
+	public Reservation buchen(LocalDateTime from, LocalDateTime to, Guest guest);
+
+	public String getNummer();
 }

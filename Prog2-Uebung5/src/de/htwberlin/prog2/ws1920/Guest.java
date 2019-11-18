@@ -5,21 +5,26 @@ import java.util.Date;
 import de.htwberlin.prog2.ws1920.extern.Wallet;
 
 public class Guest {
-	
-	private String name;
+
+	private String firstName;
+	private String lastName;
 	private Gender gender;
 	private Date birthDate;
 	private Address privateAdresse;
 	private Address businessAdresse;
 	private Wallet<IBuchbar> bookingHistory;
 	private Wallet<Payment> paymentHistory;
-	
-	public Guest(String name) {
-		this.name = name;
+	private long id;
+	private static long counter = 100;
+
+	public Guest(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.id = counter++;
 		bookingHistory = new Wallet<>();
 		paymentHistory = new Wallet<>();
 	}
-	
+
 	public void setPrivateAdresse(Address privateAdresse) {
 		this.privateAdresse = privateAdresse;
 	}
@@ -40,7 +45,6 @@ public class Guest {
 		this.birthDate = birthDate;
 	}
 
-
 	/**
 	 * @return the bookingHistory
 	 */
@@ -48,13 +52,30 @@ public class Guest {
 		return bookingHistory;
 	}
 
-	public String toString() {
-		return "Guest [name=" + name + ", privateAdresse=" + privateAdresse + ", businessAdresse=" + businessAdresse
-				+ "]";
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
 	}
 
+	/**
+	 * @return the firstName
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
 
-	
+	/**
+	 * @return the lastName
+	 */
+	public String getLastName() {
+		return lastName;
+	}
 
-	
+	public String toString() {
+		return "Guest [name=" + firstName + " " + lastName + ", privateAdresse=" + privateAdresse + ", businessAdresse="
+				+ businessAdresse + "]";
+	}
+
 }

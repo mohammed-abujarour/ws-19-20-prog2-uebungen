@@ -4,11 +4,22 @@ import java.time.LocalDateTime;
 
 public class Fahrrad implements IBuchbar {
 
+	private String id;
+
+	public Fahrrad(String id) {
+		this.id = id;
+	}
+
 	@Override
-	public boolean buchen(LocalDateTime from, LocalDateTime to) {
+	public Reservation buchen(LocalDateTime from, LocalDateTime to, Guest guest) {
 
 		System.out.println("Fahrrad.buchen() wurde von " + from + " bis " + to + "gebucht");
-		return true;
+		return null;
+	}
+
+	@Override
+	public String getNummer() {
+		return id;
 	}
 
 }

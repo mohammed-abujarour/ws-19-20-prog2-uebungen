@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 public class Dopplezimmer extends Zimmer implements IBuchbar {
 
-	private boolean seperatedBeds ;
-	
+	private boolean seperatedBeds;
+
 	public Dopplezimmer(String number) {
 		super(number);
 	}
@@ -20,15 +20,18 @@ public class Dopplezimmer extends Zimmer implements IBuchbar {
 
 	@Override
 	public String toString() {
-		return  super.toString() + " seperatedBeds= " + seperatedBeds ;
+		return super.toString() + " seperatedBeds= " + seperatedBeds;
 	}
 
 	@Override
-	public boolean buchen(LocalDateTime from, LocalDateTime to) {
+	public Reservation buchen(LocalDateTime from, LocalDateTime to, Guest guest) {
 
-		return false;
+		return null;
 	}
 
-	
+	@Override
+	public String getNummer() {
+		return super.getNumber();
+	}
 
 }
