@@ -126,6 +126,7 @@ public class Starter {
 //		List<Reservation> filteredReservations = filterReservations(motelOne.getReservations(), day);
 		Set<Reservation> filteredReservations = motelOne.getReservations(day);
 
+		if(filteredReservations != null)
 		for (Reservation reservation : filteredReservations)
 			System.out.println(reservation);
 
