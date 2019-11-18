@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 
-public class Reservation{
+public class Reservation implements Comparable<Reservation> {
 
 	private IBuchbar bookedItem;
 	private String notes;
@@ -93,6 +93,10 @@ public class Reservation{
 		return builder.toString();
 	}
 
-	
+	@Override
+	public int compareTo(Reservation o) {
+
+		return this.guest.getFirstName().compareTo(o.getGuest().getFirstName());
+	}
 
 }

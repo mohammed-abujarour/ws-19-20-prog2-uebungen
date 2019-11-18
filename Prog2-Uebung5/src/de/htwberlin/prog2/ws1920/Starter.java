@@ -104,7 +104,8 @@ public class Starter {
 		System.out.println("Starter.showSortedReservations()");
 
 		LocalDate day = readDate();
-		List<Reservation> filteredReservations = filterReservations(motelOne.getReservations(), day);
+//		List<Reservation> filteredReservations = filterReservations(motelOne.getReservations(), day);
+		Set<Reservation> filteredReservations = motelOne.getReservations(day);
 
 		for (Reservation reservation : filteredReservations)
 			System.out.println(reservation);
@@ -113,6 +114,7 @@ public class Starter {
 	}
 
 	private static List<Reservation> filterReservations(List<Reservation> reservations, LocalDate day) {
+		// TODO Auto-generated method stub
 		return reservations;
 	}
 
