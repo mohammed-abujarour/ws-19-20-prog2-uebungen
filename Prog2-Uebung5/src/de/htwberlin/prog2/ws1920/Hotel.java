@@ -1,12 +1,15 @@
 package de.htwberlin.prog2.ws1920;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class Hotel {
@@ -16,11 +19,16 @@ public class Hotel {
 
 	private List<Reservation> reservations = new ArrayList<>();
 	private Map<LocalDate, Set<Reservation>> reservationIndex;
+	private Map<Guest, Long> loyalCustomers;
+	private Set<Guest> guests ;
+	
 
 	public Hotel(String name) {
 		this.name = name;
 		this.services = new ArrayList<>();
 		this.reservationIndex = new HashMap<LocalDate, Set<Reservation>>();
+		this.loyalCustomers = new TreeMap<>();
+		this.guests = new HashSet<>();
 	}
 
 	public boolean addService(IBuchbar zimmer) {
@@ -45,14 +53,27 @@ public class Hotel {
 			if (!(service instanceof Zimmer))
 				continue;
 			Reservation reservation = service.buchen(from, to, guest);
-
-			this.reservations.add(reservation);
-			updateIndex(reservation);
-			if (reservation != null)
+			
+			if (reservation != null) {
+				this.reservations.add(reservation);
+				updateIndex(reservation);
+				updateLoyalCustomers(reservation);
+				
+				this.guests.add(reservation.getGuest());
+				
 				return reservation;
+			}
 		}
 
 		return null;
+	}
+
+	private void updateLoyalCustomers(Reservation reservation) {
+
+		Guest key = reservation.getGuest();
+		long days = Duration.between(reservation.getFrom(), reservation.getTo()).toDays();
+		this.loyalCustomers.put(key, this.loyalCustomers.get(key) != null ? this.loyalCustomers.get(key) + days : days );
+	
 	}
 
 	private void updateIndex(Reservation reservation) {
@@ -68,7 +89,14 @@ public class Hotel {
 		this.reservationIndex.put(key, currentReservations);
 
 	}
+	
+	public Map<Guest, Long> getLoyalCustomers(){
+		return this.loyalCustomers;
+	}
 
+	public Set<Guest> getGuests(){
+		return this.guests;
+	}
 	public String getName() {
 		return name;
 	}

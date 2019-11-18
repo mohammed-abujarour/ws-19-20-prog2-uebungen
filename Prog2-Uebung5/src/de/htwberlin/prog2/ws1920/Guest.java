@@ -4,7 +4,7 @@ import java.util.Date;
 
 import de.htwberlin.prog2.ws1920.extern.Wallet;
 
-public class Guest {
+public class Guest implements Comparable<Guest>{
 
 	private String firstName;
 	private String lastName;
@@ -15,6 +15,7 @@ public class Guest {
 	private Wallet<IBuchbar> bookingHistory;
 	private Wallet<Payment> paymentHistory;
 	private long id;
+	private long points = 0;
 	private static long counter = 100;
 
 	public Guest(String firstName, String lastName) {
@@ -73,9 +74,49 @@ public class Guest {
 		return lastName;
 	}
 
-	public String toString() {
-		return "Guest [name=" + firstName + " " + lastName + ", privateAdresse=" + privateAdresse + ", businessAdresse="
-				+ businessAdresse + "]";
+	/**
+	 * @return the points
+	 */
+	public long getPoints() {
+		return points;
 	}
+
+	/**
+	 * @param points the points to set
+	 */
+	public void addPoints(long points) {
+		this.points += points;
+	}
+
+
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(id);
+		builder.append(". ");
+
+		if (firstName != null) {
+			builder.append(firstName);
+			builder.append(" ");
+		}
+		if (lastName != null) {
+			builder.append(lastName);
+			builder.append(", ");
+		}
+	
+		builder.append(points);
+		builder.append(" points");
+
+		return builder.toString();
+	}
+
+	@Override
+	public int compareTo(Guest o) {
+
+		return Long.compare(this.id, o.getId());
+	}
+
+
 
 }
