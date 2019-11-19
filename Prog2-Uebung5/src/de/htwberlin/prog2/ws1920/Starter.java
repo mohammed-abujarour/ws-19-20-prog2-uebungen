@@ -5,8 +5,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
@@ -32,7 +35,8 @@ public class Starter {
 
 		String menuEntries[] = { "Alle Reservierungen zeigen",
 				"Alle Reservierungen eines Tages nach Gast sortieren und zeigen", "Loyal Kunden zeigen",
-				"Alle Kunden sortiert nach Vorname aufsteigend, nach Nachname aufsteigend zeigen", "Beenden" };
+				"Alle Kunden sortiert nach Punkte absteigend, nach Nachname aufsteigend zeigen" , 
+				"Beenden" };
 
 		System.out.println("Menü");
 		System.out.println("=====");
@@ -91,21 +95,38 @@ public class Starter {
 
 	private static void showSortedCustomers() {
 
-		System.out.println("Starter.showSortedCustomers()");
+		Set<Guest> guests = motelOne.getGuests();
+		List<Guest> guestList = new ArrayList<>(guests);
+		
+		for(Guest guest : guestList) {
+			System.out.println(guest);
+		}
+		System.out.println();
+		Collections.sort(guestList, new GuestComparator());
+		for(Guest guest : guestList) {
+			System.out.println(guest);
+		}
 
 	}
 
 	private static void showLoyalCustomers() {
 
-		System.out.println("Starter.showLoyalCustomers()");
+		Map<Guest, Long> loyalCustomers = motelOne.getLoyalCustomers();
+		
+		for(Map.Entry<Guest, Long> entry: loyalCustomers.entrySet()) {
+			
+			System.out.println(entry);
+		}
 	}
 
 	private static void showSortedReservations() {
 		System.out.println("Starter.showSortedReservations()");
 
 		LocalDate day = readDate();
-		List<Reservation> filteredReservations = filterReservations(motelOne.getReservations(), day);
+//		List<Reservation> filteredReservations = filterReservations(motelOne.getReservations(), day);
+		Set<Reservation> filteredReservations = motelOne.getReservations(day);
 
+		if(filteredReservations != null)
 		for (Reservation reservation : filteredReservations)
 			System.out.println(reservation);
 
@@ -113,6 +134,7 @@ public class Starter {
 	}
 
 	private static List<Reservation> filterReservations(List<Reservation> reservations, LocalDate day) {
+		// TODO Auto-generated method stub
 		return reservations;
 	}
 

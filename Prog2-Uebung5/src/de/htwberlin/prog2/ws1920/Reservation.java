@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 
-public class Reservation{
+public class Reservation implements Comparable<Reservation> {
 
 	private IBuchbar bookedItem;
 	private String notes;
@@ -18,11 +18,12 @@ public class Reservation{
 		this.bookedItem = bookedItem;
 		this.from = from;
 		this.to = to;
+		if (from.isAfter(to))
+			throw new Exception("Invalid Input - " + from + " must be before " + to);
+
 		if (guest == null)
 			throw new Exception("Invlid Input - Guest cannot be null");
 		this.setGuest(guest);
-		if (from.isAfter(to))
-			throw new Exception("Invalid Input - " + from + " must be before " + to);
 
 	}
 
@@ -61,10 +62,11 @@ public class Reservation{
 	 * @param guest the guest to set
 	 */
 	public void setGuest(Guest guest) {
-		if (guest == null) return;
+		if (guest == null)
+			return;
 		this.guest = guest;
 		long newPoints = Duration.between(from, to).toDays();
-		this.guest.addPoints(newPoints );
+		this.guest.addPoints(newPoints);
 	}
 
 	@Override
@@ -97,6 +99,10 @@ public class Reservation{
 		return builder.toString();
 	}
 
-	
+	@Override
+	public int compareTo(Reservation o) {
+
+		return this.guest.getLastName().compareTo(o.getGuest().getLastName());
+	}
 
 }

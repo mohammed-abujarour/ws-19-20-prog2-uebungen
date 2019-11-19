@@ -4,7 +4,7 @@ import java.util.Date;
 
 import de.htwberlin.prog2.ws1920.extern.Wallet;
 
-public class Guest {
+public class Guest implements Comparable<Guest> {
 
 	private String firstName;
 	private String lastName;
@@ -15,16 +15,16 @@ public class Guest {
 	private Wallet<IBuchbar> bookingHistory;
 	private Wallet<Payment> paymentHistory;
 	private long id;
+	private long points = 0;
 	private static long counter = 100;
-	private long points;
-	
+
 	public Guest(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.id = counter++;
 		bookingHistory = new Wallet<>();
 		paymentHistory = new Wallet<>();
-		
+
 	}
 
 	public void setPrivateAdresse(Address privateAdresse) {
@@ -75,17 +75,66 @@ public class Guest {
 		return lastName;
 	}
 
+	/**
+	 * @return the businessAdresse
+	 */
+	public Address getBusinessAdresse() {
+		return businessAdresse;
+	}
+
+	/**
+	 * @param businessAdresse the businessAdresse to set
+	 */
+	public void setBusinessAdresse(Address businessAdresse) {
+		this.businessAdresse = businessAdresse;
+	}
+
+	/**
+	 * @return the privateAdresse
+	 */
+	public Address getPrivateAdresse() {
+		return privateAdresse;
+	}
+
+	/**
+	 * @return the points
+	 */
 	public long getPoints() {
-		return this.points;
+		return points;
 	}
-	
-	
-	public void addPoints(long newPoints) {
-		this.points += newPoints;				
+
+	/**
+	 * @param points the points to set
+	 */
+	public void addPoints(long points) {
+		this.points += points;
 	}
+
+	@Override
 	public String toString() {
-		return "Guest [name=" + firstName + " " + lastName + ", privateAdresse=" + privateAdresse + ", businessAdresse="
-				+ businessAdresse + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append(id);
+		builder.append(". ");
+
+		if (firstName != null) {
+			builder.append(firstName);
+			builder.append(" ");
+		}
+		if (lastName != null) {
+			builder.append(lastName);
+			builder.append(", ");
+		}
+
+		builder.append(points);
+		builder.append(" points");
+
+		return builder.toString();
+	}
+
+	@Override
+	public int compareTo(Guest o) {
+
+		return Long.compare(this.id, o.getId());
 	}
 
 }
