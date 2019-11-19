@@ -16,13 +16,15 @@ public class Guest {
 	private Wallet<Payment> paymentHistory;
 	private long id;
 	private static long counter = 100;
-
+	private long points;
+	
 	public Guest(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.id = counter++;
 		bookingHistory = new Wallet<>();
 		paymentHistory = new Wallet<>();
+		
 	}
 
 	public void setPrivateAdresse(Address privateAdresse) {
@@ -73,6 +75,14 @@ public class Guest {
 		return lastName;
 	}
 
+	public long getPoints() {
+		return this.points;
+	}
+	
+	
+	public void addPoints(long newPoints) {
+		this.points += newPoints;				
+	}
 	public String toString() {
 		return "Guest [name=" + firstName + " " + lastName + ", privateAdresse=" + privateAdresse + ", businessAdresse="
 				+ businessAdresse + "]";
