@@ -1,5 +1,6 @@
 package de.htwberlin.prog2.ws1920;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -15,13 +16,14 @@ public class Reservation{
 
 	public Reservation(IBuchbar bookedItem, Guest guest, LocalDateTime from, LocalDateTime to) throws Exception {
 		this.bookedItem = bookedItem;
+		this.from = from;
+		this.to = to;
 		if (guest == null)
 			throw new Exception("Invlid Input - Guest cannot be null");
 		this.setGuest(guest);
 		if (from.isAfter(to))
 			throw new Exception("Invalid Input - " + from + " must be before " + to);
-		this.from = from;
-		this.to = to;
+
 	}
 
 	public String getNotes() {
@@ -59,8 +61,10 @@ public class Reservation{
 	 * @param guest the guest to set
 	 */
 	public void setGuest(Guest guest) {
-		if (guest != null)
-			this.guest = guest;
+		if (guest == null) return;
+		this.guest = guest;
+		long newPoints = Duration.between(from, to).toDays();
+		this.guest.addPoints(newPoints );
 	}
 
 	@Override
