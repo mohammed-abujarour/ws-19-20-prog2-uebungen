@@ -33,9 +33,15 @@ public class Starter {
 
 	private static void showMenue() {
 
-		String menuEntries[] = { "Alle Reservierungen zeigen",
-				"Alle Reservierungen eines Tages nach Gast sortieren und zeigen", "Loyal Kunden zeigen",
+		String menuEntries[] = { 
+				"Alle Reservierungen zeigen",
+				"Alle Reservierungen eines Tages nach Gast sortieren und zeigen", 
 				"Alle Kunden sortiert nach Punkte absteigend, nach Nachname aufsteigend zeigen" , 
+				"Alle Daten Exportieren",
+				"Alle Daten Importieren",
+				"Liste der Loyal Kunden als TXT Exportieren",
+				"Hotel Stammdaten von CSV Importieren",
+				"Alle Daten als CSV Exportieren",
 				"Beenden" };
 
 		System.out.println("Menü");
@@ -77,12 +83,25 @@ public class Starter {
 			showSortedReservations();
 			break;
 		case 3:
-			showLoyalCustomers();
-			break;
-		case 4:
 			showSortedCustomers();
 			break;
+		case 4:
+			exportObject();
+			break;
 		case 5:
+			importObject();
+			break;
+		case 6:
+			loyalKundenExportieren();
+			break;
+		case 7:
+			csvExport();
+			break;
+		case 8:
+			hotelStammdatenCsvImport();
+			break;
+
+		case 9:
 			quitApp();
 			break;
 		default: {
@@ -91,6 +110,43 @@ public class Starter {
 		}
 
 		}
+	}
+
+	/**
+	 * 
+	 */
+	private static void hotelStammdatenCsvImport() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * 
+	 */
+	private static void csvExport() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * 
+	 */
+	private static void loyalKundenExportieren() {}
+
+	/**
+	 * 
+	 */
+	private static void importObject() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * 
+	 */
+	private static void exportObject() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private static void showSortedCustomers() {
@@ -109,15 +165,6 @@ public class Starter {
 
 	}
 
-	private static void showLoyalCustomers() {
-
-		Map<Guest, Long> loyalCustomers = motelOne.getLoyalCustomers();
-		
-		for(Map.Entry<Guest, Long> entry: loyalCustomers.entrySet()) {
-			
-			System.out.println(entry);
-		}
-	}
 
 	private static void showSortedReservations() {
 		System.out.println("Starter.showSortedReservations()");
@@ -197,7 +244,7 @@ public class Starter {
 		Guest martina = new Guest("Martina", "Abbott");
 		Guest sara = new Guest("Sara", "Young");
 		Guest sabine = new Guest("Sabine", "Hunt");
-		return new Guest[] { darrin, maxwell, scott, emma, flora, hartmann, vera, sara, sabine};
+		return new Guest[] { darrin, maxwell, scott, emma, flora, hartmann, vera, sara, sabine, brandt, gerhard, martina};
 	}
 
 	private static void initHotel(Hotel motelOne) {

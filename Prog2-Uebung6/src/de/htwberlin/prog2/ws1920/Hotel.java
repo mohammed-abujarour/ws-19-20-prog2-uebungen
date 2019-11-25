@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -19,7 +21,6 @@ public class Hotel {
 
 	private List<Reservation> reservations = new ArrayList<>();
 	private Map<LocalDate, Set<Reservation>> reservationIndex;
-	private Map<Guest, Long> loyalCustomers;
 	private Set<Guest> guests ;
 	
 
@@ -27,7 +28,6 @@ public class Hotel {
 		this.name = name;
 		this.services = new ArrayList<>();
 		this.reservationIndex = new HashMap<LocalDate, Set<Reservation>>();
-		this.loyalCustomers = new TreeMap<>();
 		this.guests = new HashSet<>();
 	}
 
@@ -57,10 +57,7 @@ public class Hotel {
 			if (reservation != null) {
 				this.reservations.add(reservation);
 				updateIndex(reservation);
-				updateLoyalCustomers(reservation);
-				
 				this.guests.add(reservation.getGuest());
-				
 				return reservation;
 			}
 		}
@@ -68,13 +65,7 @@ public class Hotel {
 		return null;
 	}
 
-	private void updateLoyalCustomers(Reservation reservation) {
-
-		Guest key = reservation.getGuest();
-		long days = Duration.between(reservation.getFrom(), reservation.getTo()).toDays();
-		this.loyalCustomers.put(key, this.loyalCustomers.get(key) != null ? this.loyalCustomers.get(key) + days : days );
 	
-	}
 
 	private void updateIndex(Reservation reservation) {
 
@@ -89,13 +80,26 @@ public class Hotel {
 		this.reservationIndex.put(key, currentReservations);
 
 	}
-	
-	public Map<Guest, Long> getLoyalCustomers(){
-		return this.loyalCustomers;
-	}
 
 	public Set<Guest> getGuests(){
 		return this.guests;
+	}
+	/**
+	 * 
+	 * @return top 10% Kunden laut ihren Points
+	 */
+	public List<Guest> getLoyalKunden(){
+		
+		List<Guest> copy = new ArrayList<>(this.guests);
+		Collections.sort(copy, new Comparator<Guest>() {
+			public int compare(Guest g1, Guest g2) {
+				return -1*Long.compare(g1.getPoints(), g2.getPoints());
+			}
+		});
+		
+		int toIndex = (int) Math.ceil( copy.size() * 0.1 );
+		return copy.subList(0, toIndex );
+
 	}
 	public String getName() {
 		return name;
