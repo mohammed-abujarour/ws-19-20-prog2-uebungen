@@ -1,7 +1,10 @@
 package de.htwberlin.prog2.ws1920;
 
-public abstract class Zimmer {
+import java.io.Serializable;
 
+public abstract class Zimmer implements Serializable{
+
+	private static final long serialVersionUID = -1828538641653373840L;
 	private String number;
 	private double price;
 	private int capacity;

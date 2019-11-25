@@ -1,8 +1,10 @@
 package de.htwberlin.prog2.ws1920;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,6 +50,44 @@ public class IOUtils {
 		}
 				
 		return success;
+	}
+
+	/**
+	 * @param archiveFile
+	 * @return
+	 */
+	public static Hotel importHotelObject(String archiveFile) {
+		File file = new File(archiveFile);
+		if(!file.exists())
+			return null;
+		if(!file.canRead())
+			return null;
+		if(!file.isFile())
+			return null;
+		ObjectInputStream ois = null;
+		
+		Hotel importedHotel = null;
+		try {
+			ois = new ObjectInputStream(new FileInputStream(file));
+			Object importedObject = ois.readObject();
+			if(importedObject!=null) {
+				if(importedObject instanceof Hotel) {
+					importedHotel = (Hotel) importedObject;
+				}
+			}
+			
+		} catch (IOException | ClassNotFoundException exc) {
+			exc.printStackTrace();
+		}
+		finally {
+			if(ois!=null)
+				try {
+					ois.close();
+				} catch (IOException exc) {
+					exc.printStackTrace();
+				}
+		}
+		return importedHotel;
 	}
 
 }

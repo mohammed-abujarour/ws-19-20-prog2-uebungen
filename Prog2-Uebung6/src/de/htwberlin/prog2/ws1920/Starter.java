@@ -1,5 +1,6 @@
 package de.htwberlin.prog2.ws1920;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -138,6 +139,16 @@ public class Starter {
 	 */
 	private static void importObject() {
 		
+		String archiveFile = "";
+		System.out.print("Archive:\t");
+		if(scan.hasNext()) {
+		
+			archiveFile = scan.nextLine();
+		}
+		motelOne = IOUtils.importHotelObject(archiveFile );
+		System.out.println("Hotel Import hat " + (motelOne == null ?  "nicht " : "") + "funktioniert");
+		System.out.println(motelOne);
+
 	}
 
 	/**

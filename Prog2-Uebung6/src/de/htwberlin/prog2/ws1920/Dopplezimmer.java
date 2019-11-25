@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class Dopplezimmer extends Zimmer implements IBuchbar {
 
+	private static final long serialVersionUID = -8934089493984389461L;
 	private boolean seperatedBeds;
 
 	public Dopplezimmer(String number) {

@@ -1,9 +1,8 @@
 package de.htwberlin.prog2.ws1920;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public interface IBuchbar extends Serializable {
+public interface IBuchbar {
 
 	public Reservation buchen(LocalDateTime from, LocalDateTime to, Guest guest);
 

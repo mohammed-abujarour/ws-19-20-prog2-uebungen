@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Hotel implements Serializable {
 	private String name;
 	private Address location;
 	private List<IBuchbar> services;
+	private LocalDate openedAt;
 
 	private List<Reservation> reservations = new ArrayList<>();
 	private Map<LocalDate, Set<Reservation>> reservationIndex;
@@ -58,6 +60,7 @@ public class Hotel implements Serializable {
 			Reservation reservation = service.buchen(from, to, guest);
 			
 			if (reservation != null) {
+				//reservation.setNotes("Booked through Hotel Management System at " + new Date());
 				this.reservations.add(reservation);
 				updateIndex(reservation);
 				this.guests.add(reservation.getGuest());
@@ -130,7 +133,7 @@ public class Hotel implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Hotel [" + (name != null ? "name=" + name + ", " : "")
+		return "Hotel [" + (name != null ? name +" since "+ openedAt + ", " : "")
 				+ (location != null ? "location=" + location + ", " : "")
 				+ (reservations != null ? "reservations=" + reservations + ", " : "")
 				+ (services != null ? "services=" + services : "") + "]";

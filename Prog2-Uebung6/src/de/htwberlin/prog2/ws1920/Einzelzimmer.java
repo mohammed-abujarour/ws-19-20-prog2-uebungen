@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Einzelzimmer extends Zimmer implements IBuchbar {
+
+	private static final long serialVersionUID = -6413597070561933073L;
 	private List<Reservation> reservations = new ArrayList<>();
 
 	public Einzelzimmer(String number) {
