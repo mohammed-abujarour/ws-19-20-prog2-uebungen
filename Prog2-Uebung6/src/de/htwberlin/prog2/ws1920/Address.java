@@ -1,9 +1,12 @@
 package de.htwberlin.prog2.ws1920;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
 
 	//TEIL 1/3
 	
+	private static final long serialVersionUID = 6281334797615630438L;
 	private String strasse;
 	private String hausNr;
 	private String plz;

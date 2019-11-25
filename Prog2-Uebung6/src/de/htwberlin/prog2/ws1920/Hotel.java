@@ -1,5 +1,6 @@
 package de.htwberlin.prog2.ws1920;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,7 +15,9 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-public class Hotel {
+public class Hotel implements Serializable {
+
+	private static final long serialVersionUID = -9078931012057164649L;
 	private String name;
 	private Address location;
 	private List<IBuchbar> services;

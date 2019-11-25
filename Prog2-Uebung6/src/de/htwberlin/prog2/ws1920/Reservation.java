@@ -1,13 +1,15 @@
 package de.htwberlin.prog2.ws1920;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 
-public class Reservation implements Comparable<Reservation> {
+public class Reservation implements Comparable<Reservation>, Serializable {
 
+	private static final long serialVersionUID = -3378665643393130226L;
 	private IBuchbar bookedItem;
 	private String notes;
 	private LocalDateTime from;

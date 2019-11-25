@@ -1,11 +1,14 @@
 package de.htwberlin.prog2.ws1920;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import de.htwberlin.prog2.ws1920.extern.Wallet;
 
-public class Guest implements Comparable<Guest> {
+public class Guest implements Comparable<Guest>, Serializable {
 
+
+	private static final long serialVersionUID = -6587400061902621747L;
 	private String firstName;
 	private String lastName;
 	private Gender gender;
