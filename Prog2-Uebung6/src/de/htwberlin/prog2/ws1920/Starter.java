@@ -145,7 +145,9 @@ public class Starter {
 	 * 
 	 */
 	private static void exportObject() {
-		// TODO Auto-generated method stub
+		
+		boolean result = IOUtils.exportHotelObject(motelOne);
+		System.out.println(result);
 		
 	}
 
