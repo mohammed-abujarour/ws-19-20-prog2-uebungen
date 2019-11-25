@@ -132,7 +132,18 @@ public class Starter {
 	/**
 	 * 
 	 */
-	private static void loyalKundenExportieren() {}
+	private static void loyalKundenExportieren() {
+		String filePath = "";
+		System.out.print("Zieldatei:\t");
+		if(scan.hasNext()) {
+		
+			filePath = scan.nextLine();
+		}
+		List<Guest> loyalKunden = motelOne.getLoyalKunden();
+		boolean result = IOUtils.exportLoyalKundenList(loyalKunden, filePath);
+		System.out.println("Export hat " + (result ?  "" : "nicht ") + "funktioniert");
+		
+	}
 
 	/**
 	 * 

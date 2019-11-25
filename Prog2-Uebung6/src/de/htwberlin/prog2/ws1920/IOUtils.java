@@ -3,11 +3,13 @@ package de.htwberlin.prog2.ws1920;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Mohammed AbuJarour (mohammed.abujarour@htw-berlin.de)
@@ -88,6 +90,39 @@ public class IOUtils {
 				}
 		}
 		return importedHotel;
+	}
+
+	/**
+	 * @param loyalKunden
+	 * @return
+	 */
+	public static boolean exportLoyalKundenList(List<Guest> loyalKunden, String filePath) {
+
+		boolean success = false;
+		
+		FileWriter fw = null;
+		File file = new File(filePath);
+		if(file.exists())
+			System.out.println("File " + file + " existiert schon! Wird überschrieben");
+		try {
+			fw = new FileWriter(file);
+			for(Guest kunde : loyalKunden)
+				fw.append(kunde.toString() + System.getProperty("line.separator") );
+			
+			success = true;
+			
+			fw.flush();
+		} catch (IOException exc) {
+			exc.printStackTrace();
+		}finally {
+			if(fw!=null)
+				try {
+					fw.close();
+				} catch (IOException exc) {
+					exc.printStackTrace();
+				}
+		}
+		return success;
 	}
 
 }
