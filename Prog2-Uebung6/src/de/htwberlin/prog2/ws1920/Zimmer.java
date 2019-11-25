@@ -2,7 +2,7 @@ package de.htwberlin.prog2.ws1920;
 
 import java.io.Serializable;
 
-public abstract class Zimmer implements Serializable{
+public abstract class Zimmer implements Serializable {
 
 	private static final long serialVersionUID = -1828538641653373840L;
 	private String number;

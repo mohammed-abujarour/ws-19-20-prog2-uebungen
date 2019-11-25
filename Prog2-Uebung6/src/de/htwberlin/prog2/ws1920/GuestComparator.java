@@ -4,7 +4,6 @@ import java.util.Comparator;
 
 public class GuestComparator implements Comparator<Guest> {
 
-
 	@Override
 	public int compare(Guest g1, Guest g2) {
 

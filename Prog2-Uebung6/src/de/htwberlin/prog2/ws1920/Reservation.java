@@ -29,7 +29,6 @@ public class Reservation implements Comparable<Reservation>, Serializable {
 
 	}
 
-	
 	public String getNotes() {
 		return notes;
 	}
@@ -37,7 +36,6 @@ public class Reservation implements Comparable<Reservation>, Serializable {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-
 
 	public LocalDateTime getTo() {
 		return to;
@@ -100,7 +98,7 @@ public class Reservation implements Comparable<Reservation>, Serializable {
 			builder.append(", ");
 			builder.append(notes);
 		}
-		
+
 		return builder.toString();
 	}
 

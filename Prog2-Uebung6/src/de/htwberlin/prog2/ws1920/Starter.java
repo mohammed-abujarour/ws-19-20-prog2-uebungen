@@ -1,6 +1,5 @@
 package de.htwberlin.prog2.ws1920;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
@@ -34,16 +32,11 @@ public class Starter {
 
 	private static void showMenue() {
 
-		String menuEntries[] = { 
-				"Alle Reservierungen zeigen",
-				"Alle Reservierungen eines Tages nach Gast sortieren und zeigen", 
-				"Alle Kunden sortiert nach Punkte absteigend, nach Nachname aufsteigend zeigen" , 
-				"Alle Daten Exportieren",
-				"Alle Daten Importieren",
-				"Liste der Loyal Kunden als TXT Exportieren",
-				"Hotel Stammdaten von CSV Importieren",
-				"Alle Daten als CSV Exportieren",
-				"Beenden" };
+		String menuEntries[] = { "Alle Reservierungen zeigen",
+				"Alle Reservierungen eines Tages nach Gast sortieren und zeigen",
+				"Alle Kunden sortiert nach Punkte absteigend, nach Nachname aufsteigend zeigen",
+				"Alle Daten Exportieren", "Alle Daten Importieren", "Liste der Loyal Kunden als TXT Exportieren",
+				"Hotel Stammdaten von CSV Importieren", "Beenden" };
 
 		System.out.println("Menü");
 		System.out.println("=====");
@@ -96,13 +89,9 @@ public class Starter {
 			loyalKundenExportieren();
 			break;
 		case 7:
-			csvExport();
-			break;
-		case 8:
 			hotelStammdatenCsvImport();
 			break;
-
-		case 9:
+		case 8:
 			quitApp();
 			break;
 		default: {
@@ -117,16 +106,16 @@ public class Starter {
 	 * 
 	 */
 	private static void hotelStammdatenCsvImport() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	/**
-	 * 
-	 */
-	private static void csvExport() {
-		// TODO Auto-generated method stub
-		
+		String hotelDatenFile = "";
+		System.out.print("Hotel Stammdaten Datei:\t");
+		if (scan.hasNext()) {
+			hotelDatenFile = scan.nextLine();
+		}
+		Hotel hotel = IOUtils.importHotelDaten(hotelDatenFile);
+		System.out.println("Hotel Import hat " + (hotel == null ? "nicht " : "") + "funktioniert");
+		System.out.println(hotel);
+
 	}
 
 	/**
@@ -135,29 +124,25 @@ public class Starter {
 	private static void loyalKundenExportieren() {
 		String filePath = "";
 		System.out.print("Zieldatei:\t");
-		if(scan.hasNext()) {
-		
+		if (scan.hasNext()) {
+
 			filePath = scan.nextLine();
 		}
 		List<Guest> loyalKunden = motelOne.getLoyalKunden();
 		boolean result = IOUtils.exportLoyalKundenList(loyalKunden, filePath);
-		System.out.println("Export hat " + (result ?  "" : "nicht ") + "funktioniert");
-		
+		System.out.println("Export hat " + (result ? "" : "nicht ") + "funktioniert");
+
 	}
 
-	/**
-	 * 
-	 */
 	private static void importObject() {
-		
+
 		String archiveFile = "";
 		System.out.print("Archive:\t");
-		if(scan.hasNext()) {
-		
+		if (scan.hasNext()) {
 			archiveFile = scan.nextLine();
 		}
-		motelOne = IOUtils.importHotelObject(archiveFile );
-		System.out.println("Hotel Import hat " + (motelOne == null ?  "nicht " : "") + "funktioniert");
+		motelOne = IOUtils.importHotelObject(archiveFile);
+		System.out.println("Hotel Import hat " + (motelOne == null ? "nicht " : "") + "funktioniert");
 		System.out.println(motelOne);
 
 	}
@@ -166,28 +151,27 @@ public class Starter {
 	 * 
 	 */
 	private static void exportObject() {
-		
+
 		boolean result = IOUtils.exportHotelObject(motelOne);
 		System.out.println("Hotel Export hat " + (result ? "" : "nicht ") + "funktioniert");
-		
+
 	}
 
 	private static void showSortedCustomers() {
 
 		Set<Guest> guests = motelOne.getGuests();
 		List<Guest> guestList = new ArrayList<>(guests);
-		
-		for(Guest guest : guestList) {
+
+		for (Guest guest : guestList) {
 			System.out.println(guest);
 		}
 		System.out.println();
 		Collections.sort(guestList, new GuestComparator());
-		for(Guest guest : guestList) {
+		for (Guest guest : guestList) {
 			System.out.println(guest);
 		}
 
 	}
-
 
 	private static void showSortedReservations() {
 		System.out.println("Starter.showSortedReservations()");
@@ -196,16 +180,11 @@ public class Starter {
 //		List<Reservation> filteredReservations = filterReservations(motelOne.getReservations(), day);
 		Set<Reservation> filteredReservations = motelOne.getReservations(day);
 
-		if(filteredReservations != null)
-		for (Reservation reservation : filteredReservations)
-			System.out.println(reservation);
+		if (filteredReservations != null)
+			for (Reservation reservation : filteredReservations)
+				System.out.println(reservation);
 
 		System.out.println(day);
-	}
-
-	private static List<Reservation> filterReservations(List<Reservation> reservations, LocalDate day) {
-		// TODO Auto-generated method stub
-		return reservations;
 	}
 
 	private static LocalDate readDate() {
@@ -267,7 +246,8 @@ public class Starter {
 		Guest martina = new Guest("Martina", "Abbott");
 		Guest sara = new Guest("Sara", "Young");
 		Guest sabine = new Guest("Sabine", "Hunt");
-		return new Guest[] { darrin, maxwell, scott, emma, flora, hartmann, vera, sara, sabine, brandt, gerhard, martina};
+		return new Guest[] { darrin, maxwell, scott, emma, flora, hartmann, vera, sara, sabine, brandt, gerhard,
+				martina };
 	}
 
 	private static void initHotel(Hotel motelOne) {

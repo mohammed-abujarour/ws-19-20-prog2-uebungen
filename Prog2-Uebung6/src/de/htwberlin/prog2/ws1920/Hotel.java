@@ -1,19 +1,16 @@
 package de.htwberlin.prog2.ws1920;
 
 import java.io.Serializable;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class Hotel implements Serializable {
@@ -26,8 +23,7 @@ public class Hotel implements Serializable {
 
 	private List<Reservation> reservations = new ArrayList<>();
 	private Map<LocalDate, Set<Reservation>> reservationIndex;
-	private Set<Guest> guests ;
-	
+	private Set<Guest> guests;
 
 	public Hotel(String name) {
 		this.name = name;
@@ -58,9 +54,10 @@ public class Hotel implements Serializable {
 			if (!(service instanceof Zimmer))
 				continue;
 			Reservation reservation = service.buchen(from, to, guest);
-			
+
 			if (reservation != null) {
-				//reservation.setNotes("Booked through Hotel Management System at " + new Date());
+				// reservation.setNotes("Booked through Hotel Management System at " + new
+				// Date());
 				this.reservations.add(reservation);
 				updateIndex(reservation);
 				this.guests.add(reservation.getGuest());
@@ -70,8 +67,6 @@ public class Hotel implements Serializable {
 
 		return null;
 	}
-
-	
 
 	private void updateIndex(Reservation reservation) {
 
@@ -87,26 +82,28 @@ public class Hotel implements Serializable {
 
 	}
 
-	public Set<Guest> getGuests(){
+	public Set<Guest> getGuests() {
 		return this.guests;
 	}
+
 	/**
 	 * 
 	 * @return top 10% Kunden laut ihren Points
 	 */
-	public List<Guest> getLoyalKunden(){
-		
+	public List<Guest> getLoyalKunden() {
+
 		List<Guest> copy = new ArrayList<>(this.guests);
 		Collections.sort(copy, new Comparator<Guest>() {
 			public int compare(Guest g1, Guest g2) {
-				return -1*Long.compare(g1.getPoints(), g2.getPoints());
+				return -1 * Long.compare(g1.getPoints(), g2.getPoints());
 			}
 		});
-		
-		int toIndex = (int) Math.ceil( copy.size() * 0.1 );
-		return copy.subList(0, toIndex );
+
+		int toIndex = (int) Math.ceil(copy.size() * 0.1);
+		return copy.subList(0, toIndex);
 
 	}
+
 	public String getName() {
 		return name;
 	}
@@ -133,7 +130,7 @@ public class Hotel implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Hotel [" + (name != null ? name +" since "+ openedAt + ", " : "")
+		return "Hotel [" + (name != null ? name + " since " + openedAt + ", " : "")
 				+ (location != null ? "location=" + location + ", " : "")
 				+ (reservations != null ? "reservations=" + reservations + ", " : "")
 				+ (services != null ? "services=" + services : "") + "]";
