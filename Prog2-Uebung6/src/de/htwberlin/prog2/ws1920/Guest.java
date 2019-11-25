@@ -112,6 +112,13 @@ public class Guest implements Comparable<Guest>, Serializable {
 		this.points += points;
 	}
 
+	/**
+	 * @return the paymentHistory
+	 */
+	public Wallet<Payment> getPaymentHistory() {
+		return paymentHistory;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
