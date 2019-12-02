@@ -23,11 +23,37 @@ public class Starter {
 		initHotel(motelOne);
 		makeSomeReservations(motelOne);
 
+		stringSplitDemo();
+
 		while (true) {
 			showMenue();
 			int choice = readUserInput();
 			processUserInput(choice);
 		}
+	}
+
+	/**
+	 * 
+	 */
+	private static void stringSplitDemo() {
+		
+		String csvText1 = "100,HTW Berlin,14000";
+		
+		System.out.println(csvText1);
+		String parts [] = csvText1.split(",");
+		for(String part:parts)
+			System.out.println(part);
+		
+		System.out.println();
+		String csvText2 = "100;HTW Berlin;Treskowallee 8, 10318 Berlin";
+		
+		System.out.println(csvText2);
+		String parts2 [] = csvText2.split(";");
+		for(String part2:parts2)
+			System.out.println(part2);
+
+		System.out.println();
+		
 	}
 
 	private static void showMenue() {
