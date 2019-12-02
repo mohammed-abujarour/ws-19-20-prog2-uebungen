@@ -164,12 +164,21 @@ public class IOUtils {
 			if (reader.ready())
 				ort = reader.readLine();
 
+			// ... 
 			hotel = new Hotel(hotelName);
 			hotel.setLocation(new Address(strasse, hausNr, plz, ort));
 		} catch (FileNotFoundException exc) {
 			exc.printStackTrace();
 		} catch (IOException exc) {
 			exc.printStackTrace();
+		}
+		finally {
+			if(reader!=null)
+				try {
+					reader.close();
+				} catch (IOException exc) {
+					exc.printStackTrace();
+				}
 		}
 
 		return hotel;
