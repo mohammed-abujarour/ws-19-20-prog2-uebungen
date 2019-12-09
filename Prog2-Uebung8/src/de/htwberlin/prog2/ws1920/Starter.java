@@ -14,13 +14,21 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import de.htwberlin.prog2.ws1920.exc.InvalidHotelStammdatenException;
+
 public class Starter {
 
 	private static Scanner scan = new Scanner(System.in);
 	private static Hotel motelOne;
 
 	public static void main(String[] args) {
-		motelOne = new Hotel("Motel One");
+		// motelOne = new Hotel("Motel One");
+		try {
+			motelOne = Hotel.getInstance();
+		} catch (InvalidHotelStammdatenException exc) {
+			exc.printStackTrace();
+		}
+
 		initHotel(motelOne);
 		makeSomeReservations(motelOne);
 
@@ -37,24 +45,24 @@ public class Starter {
 	 * 
 	 */
 	private static void stringSplitDemo() {
-		
+
 		String csvText1 = "100,HTW Berlin,14000";
-		
+
 		System.out.println(csvText1);
-		String parts [] = csvText1.split(",");
-		for(String part:parts)
+		String parts[] = csvText1.split(",");
+		for (String part : parts)
 			System.out.println(part);
-		
+
 		System.out.println();
 		String csvText2 = "100;HTW Berlin;Treskowallee 8, 10318 Berlin";
-		
+
 		System.out.println(csvText2);
-		String parts2 [] = csvText2.split(";");
-		for(String part2:parts2)
+		String parts2[] = csvText2.split(";");
+		for (String part2 : parts2)
 			System.out.println(part2);
 
 		System.out.println();
-		
+
 	}
 
 	private static void showMenue() {

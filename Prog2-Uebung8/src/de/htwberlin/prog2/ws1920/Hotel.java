@@ -13,8 +13,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import de.htwberlin.prog2.ws1920.exc.InvalidHotelStammdatenException;
+
 public class Hotel implements Serializable {
 
+	private static final String HOTEL_DATEN_FILEPATH = "Hotel.txt";
 	private static final long serialVersionUID = -9078931012057164649L;
 	private String name;
 	private Address location;
@@ -25,11 +28,28 @@ public class Hotel implements Serializable {
 	private Map<LocalDate, Set<Reservation>> reservationIndex;
 	private Set<Guest> guests;
 
-	public Hotel(String name) {
+	private static Hotel hotel;
+
+	private Hotel(String name) {
 		this.name = name;
 		this.services = new ArrayList<>();
 		this.reservationIndex = new HashMap<LocalDate, Set<Reservation>>();
 		this.guests = new HashSet<>();
+	}
+
+	public static Hotel getInstance() throws InvalidHotelStammdatenException {
+
+		if (hotel == null) {
+			String hotelStammdaten[] = IOUtils.importHotelDaten(HOTEL_DATEN_FILEPATH);
+			if (hotelStammdaten == null || hotelStammdaten.length == 0)
+				throw new InvalidHotelStammdatenException("Hotel.txt", hotelStammdaten);
+
+			hotel = new Hotel(hotelStammdaten[0]);
+			hotel.setLocation(
+					new Address(hotelStammdaten[1], hotelStammdaten[2], hotelStammdaten[3], hotelStammdaten[4]));
+		}
+
+		return hotel;
 	}
 
 	public boolean addService(IBuchbar zimmer) {

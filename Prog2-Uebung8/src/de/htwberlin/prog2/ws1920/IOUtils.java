@@ -130,10 +130,10 @@ public class IOUtils {
 	 * @param hotelDatenFile
 	 * @return
 	 */
-	public static String [] importHotelDaten(String hotelDatenFile) {
+	public static String[] importHotelDaten(String hotelDatenFile) {
 
-		String hotelStammDaten [] = null;
-		
+		String hotelStammDaten[] = null;
+
 		File file = new File(hotelDatenFile);
 		if (!file.exists())
 			return null;
@@ -149,18 +149,17 @@ public class IOUtils {
 			String hotelRohDaten = null;
 			if (reader.ready()) {
 				hotelRohDaten = reader.readLine();
-				
-				if(hotelRohDaten != null)
+
+				if (hotelRohDaten != null)
 					hotelStammDaten = hotelRohDaten.split(",");
 			}
-			
+
 		} catch (FileNotFoundException exc) {
 			exc.printStackTrace();
 		} catch (IOException exc) {
 			exc.printStackTrace();
-		}
-		finally {
-			if(reader!=null)
+		} finally {
+			if (reader != null)
 				try {
 					reader.close();
 				} catch (IOException exc) {
