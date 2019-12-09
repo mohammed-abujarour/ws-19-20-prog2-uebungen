@@ -15,6 +15,19 @@ import java.util.Scanner;
 import java.util.Set;
 
 import de.htwberlin.prog2.ws1920.exc.InvalidHotelStammdatenException;
+import de.htwberlin.prog2.ws1920.interior.Ausstattung;
+import de.htwberlin.prog2.ws1920.interior.Bueroschrank;
+import de.htwberlin.prog2.ws1920.interior.Einrichter;
+import de.htwberlin.prog2.ws1920.interior.Esstisch;
+import de.htwberlin.prog2.ws1920.interior.Esszimmerstuhl;
+import de.htwberlin.prog2.ws1920.interior.Konferenzstuhl;
+import de.htwberlin.prog2.ws1920.interior.Konferenztisch;
+import de.htwberlin.prog2.ws1920.interior.LuxusKleiderschrank;
+import de.htwberlin.prog2.ws1920.interior.OfficeEinrichter;
+import de.htwberlin.prog2.ws1920.interior.Schrank;
+import de.htwberlin.prog2.ws1920.interior.Schreibtischstuhl;
+import de.htwberlin.prog2.ws1920.interior.Stuhl;
+import de.htwberlin.prog2.ws1920.interior.Tisch;
 
 public class Starter {
 
@@ -32,7 +45,27 @@ public class Starter {
 		initHotel(motelOne);
 		makeSomeReservations(motelOne);
 
-		stringSplitDemo();
+		Office office = new Office("Off-102");
+
+		/*
+		Tisch tisch = new Konferenztisch();
+		Stuhl[] stuehle = {new Konferenzstuhl(), new Konferenzstuhl(), new Konferenzstuhl()};
+		Schrank schrank = new Bueroschrank();
+		 */
+		/*
+		 * Gefahr von Inkonsistenzen!!
+		Tisch tisch = new Esstisch();
+		Stuhl[] stuehle = {new Schreibtischstuhl(), new Konferenzstuhl(), new Esszimmerstuhl()};
+		Schrank schrank = new LuxusKleiderschrank();
+		 */
+		Einrichter officeEinrichter = new OfficeEinrichter();
+		Tisch tisch = officeEinrichter.createTisch();
+		Stuhl[] stuehle = officeEinrichter.createStuhle();
+		Schrank schrank = officeEinrichter.createSchrank();
+		
+		Ausstattung ausstattung = new Ausstattung(tisch , stuehle , schrank );
+		office.setAusstattung(ausstattung );
+		//stringSplitDemo();
 
 		while (true) {
 			showMenue();
