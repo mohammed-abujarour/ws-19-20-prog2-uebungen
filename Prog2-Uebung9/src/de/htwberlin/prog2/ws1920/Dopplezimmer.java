@@ -9,6 +9,8 @@ public class Dopplezimmer extends Zimmer implements IBuchbar {
 
 	public Dopplezimmer(String number) {
 		super(number);
+		super.setCapacity(2);
+		super.setPrice(85);
 	}
 
 	public boolean isSeperatedBeds() {

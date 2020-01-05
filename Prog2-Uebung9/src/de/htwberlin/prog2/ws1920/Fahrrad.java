@@ -24,4 +24,8 @@ public class Fahrrad implements IBuchbar, Serializable {
 		return id;
 	}
 
+    public double getPrice() {
+        return 3.5;
+    }
+
 }

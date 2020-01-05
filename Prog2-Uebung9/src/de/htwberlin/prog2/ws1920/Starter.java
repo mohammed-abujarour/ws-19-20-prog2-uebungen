@@ -16,16 +16,9 @@ import java.util.Set;
 
 import de.htwberlin.prog2.ws1920.exc.InvalidHotelStammdatenException;
 import de.htwberlin.prog2.ws1920.interior.Ausstattung;
-import de.htwberlin.prog2.ws1920.interior.Bueroschrank;
 import de.htwberlin.prog2.ws1920.interior.Einrichter;
-import de.htwberlin.prog2.ws1920.interior.Esstisch;
-import de.htwberlin.prog2.ws1920.interior.Esszimmerstuhl;
-import de.htwberlin.prog2.ws1920.interior.Konferenzstuhl;
-import de.htwberlin.prog2.ws1920.interior.Konferenztisch;
-import de.htwberlin.prog2.ws1920.interior.LuxusKleiderschrank;
 import de.htwberlin.prog2.ws1920.interior.OfficeEinrichter;
 import de.htwberlin.prog2.ws1920.interior.Schrank;
-import de.htwberlin.prog2.ws1920.interior.Schreibtischstuhl;
 import de.htwberlin.prog2.ws1920.interior.Stuhl;
 import de.htwberlin.prog2.ws1920.interior.Tisch;
 
@@ -106,7 +99,7 @@ public class Starter {
 				"Alle Daten Exportieren", "Alle Daten Importieren", "Liste der Loyal Kunden als TXT Exportieren",
 				"Hotel Stammdaten von CSV Importieren",
 				"Eine Reservierung bei einem Partner erstellen",
-				"Eine Reservierung mit Services anlegen",
+				"Ein Zimmer mit Fahrrad und Transfer buchen",
 				"Beenden" };
 
 		System.out.println("Menü");
@@ -166,7 +159,7 @@ public class Starter {
             beimPartnerReservieren();
             break;
         case 9:
-            reservierungMitServices();
+            zimmerMitServicesBuchen();
             break;            
 		case 10:
 			quitApp();
@@ -179,177 +172,177 @@ public class Starter {
 		}
 	}
 
-	/**
-     * 
-     */
-    private static void reservierungMitServices() {
 
-        System.out.println("Starter.reservierungMitServices()");
+    private static void zimmerMitServicesBuchen() {
+
+        System.out.println("Starter.zimmerMitServicesBuchen()");
     }
 
     /**
      * 
      */
     private static void beimPartnerReservieren() {
-}
+
+        System.out.println("Starter.beimPartnerReservieren()");
+
+    }
 
     /**
-	 * 
-	 */
-	private static void hotelStammdatenCsvImport() {
+     * 
+     */
+    private static void hotelStammdatenCsvImport() {
 
-		String hotelDatenFile = "";
-		System.out.print("Hotel Stammdaten Datei:\t");
-		if (scan.hasNext()) {
-			hotelDatenFile = scan.nextLine();
-		}
-		String[] hotelDaten = IOUtils.importHotelDaten(hotelDatenFile);
-		System.out.println("Hotel Import hat " + (hotelDaten == null ? "nicht " : "") + "funktioniert");
-		System.out.println(Arrays.toString(hotelDaten));
+        String hotelDatenFile = "";
+        System.out.print("Hotel Stammdaten Datei:\t");
+        if (scan.hasNext()) {
+            hotelDatenFile = scan.nextLine();
+        }
+        String[] hotelDaten = IOUtils.importHotelDaten(hotelDatenFile);
+        System.out.println("Hotel Import hat " + (hotelDaten == null ? "nicht " : "") + "funktioniert");
+        System.out.println(Arrays.toString(hotelDaten));
 
-	}
+    }
 
-	/**
-	 * 
-	 */
-	private static void loyalKundenExportieren() {
-		String filePath = "";
-		System.out.print("Zieldatei:\t");
-		if (scan.hasNext()) {
+    /**
+     * 
+     */
+    private static void loyalKundenExportieren() {
+        String filePath = "";
+        System.out.print("Zieldatei:\t");
+        if (scan.hasNext()) {
 
-			filePath = scan.nextLine();
-		}
-		List<Guest> loyalKunden = motelOne.getLoyalKunden();
-		boolean result = IOUtils.exportLoyalKundenList(loyalKunden, filePath);
-		System.out.println("Export hat " + (result ? "" : "nicht ") + "funktioniert");
+            filePath = scan.nextLine();
+        }
+        List<Guest> loyalKunden = motelOne.getLoyalKunden();
+        boolean result = IOUtils.exportLoyalKundenList(loyalKunden, filePath);
+        System.out.println("Export hat " + (result ? "" : "nicht ") + "funktioniert");
 
-	}
+    }
 
-	private static void importObject() {
+    private static void importObject() {
 
-		String archiveFile = "";
-		System.out.print("Archive:\t");
-		if (scan.hasNext()) {
-			archiveFile = scan.nextLine();
-		}
-		motelOne = IOUtils.importHotelObject(archiveFile);
-		System.out.println("Hotel Import hat " + (motelOne == null ? "nicht " : "") + "funktioniert");
-		System.out.println(motelOne);
+        String archiveFile = "";
+        System.out.print("Archive:\t");
+        if (scan.hasNext()) {
+            archiveFile = scan.nextLine();
+        }
+        motelOne = IOUtils.importHotelObject(archiveFile);
+        System.out.println("Hotel Import hat " + (motelOne == null ? "nicht " : "") + "funktioniert");
+        System.out.println(motelOne);
 
-	}
+    }
 
-	/**
-	 * 
-	 */
-	private static void exportObject() {
+    /**
+     * 
+     */
+    private static void exportObject() {
 
-		boolean result = IOUtils.exportHotelObject(motelOne);
-		System.out.println("Hotel Export hat " + (result ? "" : "nicht ") + "funktioniert");
+        boolean result = IOUtils.exportHotelObject(motelOne);
+        System.out.println("Hotel Export hat " + (result ? "" : "nicht ") + "funktioniert");
 
-	}
+    }
 
-	private static void showSortedCustomers() {
+    private static void showSortedCustomers() {
 
-		Set<Guest> guests = motelOne.getGuests();
-		List<Guest> guestList = new ArrayList<>(guests);
+        Set<Guest> guests = motelOne.getGuests();
+        List<Guest> guestList = new ArrayList<>(guests);
 
-		for (Guest guest : guestList) {
-			System.out.println(guest);
-		}
-		System.out.println();
-		Collections.sort(guestList, new GuestComparator());
-		for (Guest guest : guestList) {
-			System.out.println(guest);
-		}
+        for (Guest guest : guestList) {
+            System.out.println(guest);
+        }
+        System.out.println();
+        Collections.sort(guestList, new GuestComparator());
+        for (Guest guest : guestList) {
+            System.out.println(guest);
+        }
 
-	}
+    }
 
-	private static void showSortedReservations() {
-		System.out.println("Starter.showSortedReservations()");
+    private static void showSortedReservations() {
+        System.out.println("Starter.showSortedReservations()");
 
-		LocalDate day = readDate();
+        LocalDate day = readDate();
 //		List<Reservation> filteredReservations = filterReservations(motelOne.getReservations(), day);
-		Set<Reservation> filteredReservations = motelOne.getReservations(day);
+        Set<Reservation> filteredReservations = motelOne.getReservations(day);
 
-		if (filteredReservations != null)
-			for (Reservation reservation : filteredReservations)
-				System.out.println(reservation);
+        if (filteredReservations != null)
+            for (Reservation reservation : filteredReservations)
+                System.out.println(reservation);
 
-		System.out.println(day);
-	}
+        System.out.println(day);
+    }
 
-	private static LocalDate readDate() {
-		LocalDate day = null;
-		while (day == null) {
+    private static LocalDate readDate() {
+        LocalDate day = null;
+        while (day == null) {
 
-			System.out.print("Datum (tt.mm.jjjj)" + ":\t");
+            System.out.print("Datum (tt.mm.jjjj)" + ":\t");
 
-			if (scan.hasNextLine()) {
-				String stringDay = scan.nextLine();
-				try {
-					day = LocalDate.parse(stringDay,
-							DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.GERMAN));
-				} catch (DateTimeParseException exc) {
-					System.err.println(exc.getMessage());
-				}
-			}
+            if (scan.hasNextLine()) {
+                String stringDay = scan.nextLine();
+                try {
+                    day = LocalDate.parse(stringDay,
+                            DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.GERMAN));
+                } catch (DateTimeParseException exc) {
+                    System.err.println(exc.getMessage());
+                }
+            }
 
-		}
-		return day;
-	}
+        }
+        return day;
+    }
 
-	private static void showReservations() {
+    private static void showReservations() {
 
-		List<Reservation> reservations = motelOne.getReservations();
-		for (Reservation reservation : reservations)
-			System.out.println(reservation);
+        List<Reservation> reservations = motelOne.getReservations();
+        for (Reservation reservation : reservations)
+            System.out.println(reservation);
 
-	}
+    }
 
-	private static void quitApp() {
-		scan.close();
-		System.exit(0);
-	}
+    private static void quitApp() {
+        scan.close();
+        System.exit(0);
+    }
 
-	private static void makeSomeReservations(Hotel motelOne) {
-		Guest guests[] = loadGuests();
-		LocalDateTime startTime = LocalDateTime.of(2019, 12, 1, 0, 0);
-		Random rand = new Random();
-		for (int i = 0; i < 40; i++) {
-			LocalDateTime from = startTime.plusDays(rand.nextInt(30));
-			LocalDateTime to = from.plusDays(rand.nextInt(10) + 1);
-			Guest guest = guests[rand.nextInt(guests.length)];
-			motelOne.einZimmerBuchen(from, to, guest);
-		}
-	}
+    private static void makeSomeReservations(Hotel motelOne) {
+        Guest guests[] = loadGuests();
+        LocalDateTime startTime = LocalDateTime.of(2019, 12, 1, 0, 0);
+        Random rand = new Random();
+        for (int i = 0; i < 40; i++) {
+            LocalDateTime from = startTime.plusDays(rand.nextInt(30));
+            LocalDateTime to = from.plusDays(rand.nextInt(10) + 1);
+            Guest guest = guests[rand.nextInt(guests.length)];
+            motelOne.einZimmerBuchen(from, to, guest);
+        }
+    }
 
-	private static Guest[] loadGuests() {
+    private static Guest[] loadGuests() {
 
-		Guest darrin = new Guest("Darrin", "Blake");
-		Guest maxwell = new Guest("Maxwell", "Ferber");
-		Guest scott = new Guest("Scott", "Turner");
-		Guest emma = new Guest("Emma", "Ferber");
-		Guest flora = new Guest("Flora", "Toller");
-		Guest hartmann = new Guest("Hartmann", "Toller");
-		Guest vera = new Guest("Vera", "Hooker");
-		Guest brandt = new Guest("Brandt", "Siegel");
-		Guest gerhard = new Guest("Gerhard", "Fletcher");
-		Guest martina = new Guest("Martina", "Abbott");
-		Guest sara = new Guest("Sara", "Young");
-		Guest sabine = new Guest("Sabine", "Hunt");
-		return new Guest[] { darrin, maxwell, scott, emma, flora, hartmann, vera, sara, sabine, brandt, gerhard,
-				martina };
-	}
+        Guest darrin = new Guest("Darrin", "Blake");
+        Guest maxwell = new Guest("Maxwell", "Ferber");
+        Guest scott = new Guest("Scott", "Turner");
+        Guest emma = new Guest("Emma", "Ferber");
+        Guest flora = new Guest("Flora", "Toller");
+        Guest hartmann = new Guest("Hartmann", "Toller");
+        Guest vera = new Guest("Vera", "Hooker");
+        Guest brandt = new Guest("Brandt", "Siegel");
+        Guest gerhard = new Guest("Gerhard", "Fletcher");
+        Guest martina = new Guest("Martina", "Abbott");
+        Guest sara = new Guest("Sara", "Young");
+        Guest sabine = new Guest("Sabine", "Hunt");
+        return new Guest[] { darrin, maxwell, scott, emma, flora, hartmann, vera, sara, sabine, brandt, gerhard,
+                martina };
+    }
 
-	private static void initHotel(Hotel motelOne) {
-		for (int i = 1; i < 11; i++)
-			motelOne.addService(new Einzelzimmer("E" + i));
+    private static void initHotel(Hotel motelOne) {
+        for (int i = 1; i < 11; i++)
+            motelOne.addService(new Einzelzimmer("E" + i));
 
-		for (int i = 1; i < 21; i++)
-			motelOne.addService(new Einzelzimmer("D" + i));
+        for (int i = 1; i < 21; i++)
+            motelOne.addService(new Einzelzimmer("D" + i));
 
-		for (int i = 1; i < 20; i++)
-			motelOne.addService(new Fahrrad("F" + i));
-	}
+        
+    }
 
 }

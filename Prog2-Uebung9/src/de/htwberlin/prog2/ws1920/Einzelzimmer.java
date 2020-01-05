@@ -12,6 +12,7 @@ public class Einzelzimmer extends Zimmer implements IBuchbar {
 	public Einzelzimmer(String number) {
 		super(number);
 		super.setCapacity(1);
+		super.setPrice(50);
 	}
 
 	@Override
