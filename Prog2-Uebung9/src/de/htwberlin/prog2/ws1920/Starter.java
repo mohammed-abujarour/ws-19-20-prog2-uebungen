@@ -106,6 +106,7 @@ public class Starter {
 				"Alle Daten Exportieren", "Alle Daten Importieren", "Liste der Loyal Kunden als TXT Exportieren",
 				"Hotel Stammdaten von CSV Importieren",
 				"Eine Reservierung bei einem Partner erstellen",
+				"Eine Reservierung mit Services anlegen",
 				"Beenden" };
 
 		System.out.println("Menü");
@@ -163,8 +164,11 @@ public class Starter {
 			break;
         case 8:
             beimPartnerReservieren();
-            break;		
-		case 9:
+            break;
+        case 9:
+            reservierungMitServices();
+            break;            
+		case 10:
 			quitApp();
 			break;
 		default: {
@@ -176,6 +180,14 @@ public class Starter {
 	}
 
 	/**
+     * 
+     */
+    private static void reservierungMitServices() {
+
+        System.out.println("Starter.reservierungMitServices()");
+    }
+
+    /**
      * 
      */
     private static void beimPartnerReservieren() {
