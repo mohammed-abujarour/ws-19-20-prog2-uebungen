@@ -104,7 +104,9 @@ public class Starter {
 				"Alle Reservierungen eines Tages nach Gast sortieren und zeigen",
 				"Alle Kunden sortiert nach Punkte absteigend, nach Nachname aufsteigend zeigen",
 				"Alle Daten Exportieren", "Alle Daten Importieren", "Liste der Loyal Kunden als TXT Exportieren",
-				"Hotel Stammdaten von CSV Importieren", "Beenden" };
+				"Hotel Stammdaten von CSV Importieren",
+				"Eine Reservierung bei einem Partner erstellen",
+				"Beenden" };
 
 		System.out.println("Menü");
 		System.out.println("=====");
@@ -159,7 +161,10 @@ public class Starter {
 		case 7:
 			hotelStammdatenCsvImport();
 			break;
-		case 8:
+        case 8:
+            beimPartnerReservieren();
+            break;		
+		case 9:
 			quitApp();
 			break;
 		default: {
@@ -171,6 +176,12 @@ public class Starter {
 	}
 
 	/**
+     * 
+     */
+    private static void beimPartnerReservieren() {
+}
+
+    /**
 	 * 
 	 */
 	private static void hotelStammdatenCsvImport() {
@@ -290,7 +301,7 @@ public class Starter {
 
 	private static void makeSomeReservations(Hotel motelOne) {
 		Guest guests[] = loadGuests();
-		LocalDateTime startTime = LocalDateTime.of(2019, 11, 1, 0, 0);
+		LocalDateTime startTime = LocalDateTime.of(2019, 12, 1, 0, 0);
 		Random rand = new Random();
 		for (int i = 0; i < 40; i++) {
 			LocalDateTime from = startTime.plusDays(rand.nextInt(30));
