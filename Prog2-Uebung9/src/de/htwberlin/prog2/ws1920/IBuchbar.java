@@ -7,4 +7,6 @@ public interface IBuchbar {
 	public Reservation buchen(LocalDateTime from, LocalDateTime to, Guest guest);
 
 	public String getNummer();
+	
+	public double getPrice();
 }

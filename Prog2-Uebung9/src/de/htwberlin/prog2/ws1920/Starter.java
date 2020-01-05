@@ -98,7 +98,7 @@ public class Starter {
                 "Alle Reservierungen eines Tages nach Gast sortieren und zeigen",
                 "Alle Kunden sortiert nach Punkte absteigend, nach Nachname aufsteigend zeigen",
                 "Alle Daten Exportieren", "Alle Daten Importieren", "Liste der Loyal Kunden als TXT Exportieren",
-                "Hotel Stammdaten von CSV Importieren", "Eine Reservierung bei einem Partner erstellen", "Beenden" };
+                "Hotel Stammdaten von CSV Importieren", "Eine Reservierung bei einem Partner erstellen", "Reservierung mit Services erstellen", "Beenden" };
 
         System.out.println("Menü");
         System.out.println("=====");
@@ -157,6 +157,10 @@ public class Starter {
             beimPartnerReservieren();
             break;
         case 9:
+            reservierungMitServicesErstellen();
+            break;
+                        
+        case 10:
             quitApp();
             break;
         default: {
@@ -165,6 +169,26 @@ public class Starter {
         }
 
         }
+    }
+
+    /**
+     * 
+     */
+    private static void reservierungMitServicesErstellen() {
+       
+        IBuchbar zimmer = new Einzelzimmer("123");
+        
+        System.out.println(zimmer.getPrice());
+        
+        zimmer = new Fahrrad(zimmer, "F12");
+        System.out.println(zimmer.getPrice());
+
+        zimmer = new Transfer(zimmer, "Flughafen");
+        
+        System.out.println(zimmer.getPrice());
+        
+        
+        
     }
 
     /**
@@ -333,8 +357,8 @@ public class Starter {
         for (int i = 1; i < 21; i++)
             motelOne.addService(new Einzelzimmer("D" + i));
 
-        for (int i = 1; i < 20; i++)
-            motelOne.addService(new Fahrrad("F" + i));
+//        for (int i = 1; i < 20; i++)
+//            motelOne.addService(new Fahrrad("F" + i));
     }
 
 }
