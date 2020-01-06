@@ -5,8 +5,10 @@
  */
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-class GrundgeruestSwing extends JFrame {
+class GrundgeruestSwing extends JFrame implements ActionListener{
 
     public GrundgeruestSwing() {
         super(); // Konstruktor von JFrame
@@ -25,10 +27,18 @@ class GrundgeruestSwing extends JFrame {
         JButton button1 = new JButton("Klick mich"); // Button erzeugen
         JButton button2 = new JButton("Ende"); // Button erzeugen
 
+        button1.addActionListener(this);
+        
         panel.add(label1); // Label ans Panel
         panel.add(button1); // Button ans Panel
         panel.add(button2);
         return panel;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+
+        System.out.println("Action " + e.toString() +" received");
+        
     }
 
 }
