@@ -18,12 +18,17 @@ class GrundgeruestSwing extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Klick auf x
     }
-    
-    private JPanel init()
-    {
-    JPanel panel = new JPanel();
-    // hier Komponenten hinzufügen
-    return panel;
+
+    private JPanel init() {
+        JPanel panel = new JPanel();
+        JLabel label1 = new JLabel("Hallo 2020!"); // Label erzeugen
+        JButton button1 = new JButton("Klick mich"); // Button erzeugen
+        JButton button2 = new JButton("Ende"); // Button erzeugen
+
+        panel.add(label1); // Label ans Panel
+        panel.add(button1); // Button ans Panel
+        panel.add(button2);
+        return panel;
     }
 
 }
