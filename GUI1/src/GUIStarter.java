@@ -3,11 +3,19 @@
  * @author Mohammed AbuJarour (mohammed.abujarour@htw-berlin.de)
  *
  */
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 class GrundgeruestSwing extends JFrame implements ActionListener {
 
@@ -26,7 +34,30 @@ class GrundgeruestSwing extends JFrame implements ActionListener {
         hauptPanel = init(); // eigene Methode init()
         this.getContentPane().add(hauptPanel);// Hauptpanel dem Fenster hinzufügen
 
+        createMenu();
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Klick auf x
+    }
+
+    /**
+     * 
+     */
+    private void createMenu() {
+
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem openFile = new JMenuItem("Open ... ");
+        JMenuItem saveFile = new JMenuItem("Save");
+
+        fileMenu.add(openFile);
+        fileMenu.add(saveFile);
+
+        fileMenu.addSeparator();
+
+        fileMenu.add("Exit");
+        menuBar.add(fileMenu);
+        this.setJMenuBar(menuBar);
+
     }
 
     private JPanel init() {
