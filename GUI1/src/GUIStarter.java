@@ -13,8 +13,19 @@ class GrundgeruestSwing extends JFrame {
         setTitle("Titel Swing-Fenster"); // Titel des Fensters
         getContentPane().setBackground(Color.WHITE); // Hintergrundfarbe
 //        getContentPane().add(new JLabel("Prog 2"));
+        JPanel hauptPanel = init(); // eigene Methode init()
+        this.getContentPane().add(hauptPanel);// Hauptpanel dem Fenster hinzufügen
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Klick auf x
     }
+    
+    private JPanel init()
+    {
+    JPanel panel = new JPanel();
+    // hier Komponenten hinzufügen
+    return panel;
+    }
+
 }
 
 public class GUIStarter {
