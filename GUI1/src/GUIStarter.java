@@ -48,12 +48,34 @@ class GrundgeruestSwing extends JFrame implements ActionListener {
 
         if (quelle == klickMichbutton) {
             // change color
-            int farbIndex = new Random().nextInt(farben.length);
-            hauptPanel.setBackground(farben[farbIndex]);
-            label1.setText(farben[farbIndex].toString());
+            changeColor();
         } else if (quelle == endeButton) {
             // exit program
             System.exit(0);
+        }
+
+    }
+
+    /**
+     * 
+     */
+    private void changeColor() {
+        String message = new String("Soll die Farbe wirklich geändert werden?");
+        int antwort = JOptionPane.showConfirmDialog(this, message);
+
+        if (antwort == JOptionPane.YES_OPTION) {
+            // Farbe ändern
+            int farbIndex = new Random().nextInt(farben.length);
+            hauptPanel.setBackground(farben[farbIndex]);
+            label1.setText(farben[farbIndex].toString());
+            message = new String("Farbe wurden auf " + farben[farbIndex].toString() + " geändert");
+            JOptionPane.showMessageDialog(this, message);
+        } else if (antwort == JOptionPane.NO_OPTION) {
+            message = new String("Farbe wird nicht geändert");
+            JOptionPane.showMessageDialog(this, message);
+        } else if (antwort == JOptionPane.CANCEL_OPTION) {
+            message = new String("Aktion abgebrochen");
+            JOptionPane.showMessageDialog(this, message);
         }
 
     }
