@@ -6,9 +6,11 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Random;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -25,6 +27,8 @@ class GrundgeruestSwing extends JFrame implements ActionListener {
     private Color farben[] = { Color.BLUE, Color.CYAN, Color.DARK_GRAY, Color.GRAY, Color.GREEN, Color.LIGHT_GRAY,
             Color.MAGENTA, Color.RED, Color.WHITE };
     private JLabel label1;
+    private JMenuItem openFile = new JMenuItem("Open ... ");
+    private JMenuItem saveFile = new JMenuItem("Save");
 
     public GrundgeruestSwing() {
         super(); // Konstruktor von JFrame
@@ -46,12 +50,13 @@ class GrundgeruestSwing extends JFrame implements ActionListener {
 
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
-        JMenuItem openFile = new JMenuItem("Open ... ");
-        JMenuItem saveFile = new JMenuItem("Save");
 
         fileMenu.add(openFile);
         fileMenu.add(saveFile);
 
+        openFile.addActionListener(this);
+        saveFile.addActionListener(this);
+        
         fileMenu.addSeparator();
 
         fileMenu.add("Exit");
@@ -83,6 +88,56 @@ class GrundgeruestSwing extends JFrame implements ActionListener {
         } else if (quelle == endeButton) {
             // exit program
             System.exit(0);
+        } else if (quelle == openFile) {
+            openFile();
+        }
+        else if (quelle == saveFile) {
+            saveFile();
+        }
+
+    }
+
+  
+    private void saveFile() {
+
+        File datei = null;
+        JFileChooser fc = new JFileChooser();
+
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+         int returnVal = fc.showSaveDialog( this );
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            datei = fc.getSelectedFile();
+        }
+
+        if (datei != null) {
+            String message = new String("Datei " + datei + " wird gespeichrt");
+            JOptionPane.showMessageDialog(this, message);
+        }
+
+            
+    }
+
+    /**
+     * 
+     */
+    private void openFile() {
+
+        File datei = null;
+        JFileChooser fc = new JFileChooser();
+
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        int returnVal = fc.showOpenDialog(this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            datei = fc.getSelectedFile();
+        }
+
+        if (datei != null) {
+            String message = new String("Datei " + datei + " wird geladen");
+            JOptionPane.showMessageDialog(this, message);
         }
 
     }
