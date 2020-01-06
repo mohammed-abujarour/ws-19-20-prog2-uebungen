@@ -7,15 +7,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
-class GrundgeruestSwing extends JFrame implements ActionListener{
+class GrundgeruestSwing extends JFrame implements ActionListener {
+
+    private JButton klickMichbutton = new JButton("Klick mich"); // Button erzeugen
+    private JButton endeButton = new JButton("Ende"); // Button erzeugen
+    private JPanel hauptPanel = null;
+    private Color farben[] = { Color.BLUE, Color.CYAN, Color.DARK_GRAY, Color.GRAY, Color.GREEN, Color.LIGHT_GRAY,
+            Color.MAGENTA, Color.RED, Color.WHITE };
+    private JLabel label1;
 
     public GrundgeruestSwing() {
         super(); // Konstruktor von JFrame
         setTitle("Titel Swing-Fenster"); // Titel des Fensters
         getContentPane().setBackground(Color.WHITE); // Hintergrundfarbe
 //        getContentPane().add(new JLabel("Prog 2"));
-        JPanel hauptPanel = init(); // eigene Methode init()
+        hauptPanel = init(); // eigene Methode init()
         this.getContentPane().add(hauptPanel);// Hauptpanel dem Fenster hinzufügen
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Klick auf x
@@ -23,22 +31,31 @@ class GrundgeruestSwing extends JFrame implements ActionListener{
 
     private JPanel init() {
         JPanel panel = new JPanel();
-        JLabel label1 = new JLabel("Hallo 2020!"); // Label erzeugen
-        JButton button1 = new JButton("Klick mich"); // Button erzeugen
-        JButton button2 = new JButton("Ende"); // Button erzeugen
+        label1 = new JLabel("Hallo 2020!"); // Label erzeugen
 
-        button1.addActionListener(this);
-        
+        klickMichbutton.addActionListener(this);
+        endeButton.addActionListener(this);
+
         panel.add(label1); // Label ans Panel
-        panel.add(button1); // Button ans Panel
-        panel.add(button2);
+        panel.add(klickMichbutton); // Button ans Panel
+        panel.add(endeButton);
         return panel;
     }
 
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent event) {
 
-        System.out.println("Action " + e.toString() +" received");
-        
+        Object quelle = event.getSource();
+
+        if (quelle == klickMichbutton) {
+            // change color
+            int farbIndex = new Random().nextInt(farben.length);
+            hauptPanel.setBackground(farben[farbIndex]);
+            label1.setText(farben[farbIndex].toString());
+        } else if (quelle == endeButton) {
+            // exit program
+            System.exit(0);
+        }
+
     }
 
 }
