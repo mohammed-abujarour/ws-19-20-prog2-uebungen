@@ -3,11 +3,13 @@
  * @author Mohammed AbuJarour (mohammed.abujarour@htw-berlin.de)
  *
  */
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.util.Random;
 
@@ -21,7 +23,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-class GrundgeruestSwing extends JFrame implements ActionListener, MouseListener {
+class GrundgeruestSwing extends JFrame implements ActionListener, MouseListener, MouseMotionListener {
 
     private JButton klickMichbutton = new JButton("Klick mich"); // Button erzeugen
     private JButton endeButton = new JButton("Ende"); // Button erzeugen
@@ -31,6 +33,7 @@ class GrundgeruestSwing extends JFrame implements ActionListener, MouseListener 
     private JLabel label1;
     private JMenuItem openFile = new JMenuItem("Open ... ");
     private JMenuItem saveFile = new JMenuItem("Save");
+    private JLabel coordinates = new JLabel();
 
     public GrundgeruestSwing() {
         super(); // Konstruktor von JFrame
@@ -38,13 +41,16 @@ class GrundgeruestSwing extends JFrame implements ActionListener, MouseListener 
         getContentPane().setBackground(Color.WHITE); // Hintergrundfarbe
 //        getContentPane().add(new JLabel("Prog 2"));
         hauptPanel = init(); // eigene Methode init()
-        this.getContentPane().add(hauptPanel);// Hauptpanel dem Fenster hinzufügen
 
+        this.getContentPane().setLayout(new BorderLayout());
+        this.getContentPane().add(hauptPanel, BorderLayout.CENTER);// Hauptpanel dem Fenster hinzufügen
+        this.getContentPane().add(coordinates, BorderLayout.SOUTH);
         createMenu();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Klick auf x
 
         this.addMouseListener(this);
+        this.addMouseMotionListener(this);
     }
 
     /**
@@ -192,6 +198,18 @@ class GrundgeruestSwing extends JFrame implements ActionListener, MouseListener 
 
     public void mouseExited(MouseEvent e) {
         // TODO Auto-generated method stub
+
+    }
+
+    public void mouseDragged(MouseEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void mouseMoved(MouseEvent e) {
+
+        String newCoordinates = "(" + e.getX() + "," + e.getY() + ")";
+        coordinates.setText(newCoordinates);
 
     }
 
