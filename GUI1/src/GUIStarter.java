@@ -6,6 +6,8 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.Random;
 
@@ -19,7 +21,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-class GrundgeruestSwing extends JFrame implements ActionListener {
+class GrundgeruestSwing extends JFrame implements ActionListener, MouseListener {
 
     private JButton klickMichbutton = new JButton("Klick mich"); // Button erzeugen
     private JButton endeButton = new JButton("Ende"); // Button erzeugen
@@ -41,6 +43,8 @@ class GrundgeruestSwing extends JFrame implements ActionListener {
         createMenu();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Klick auf x
+
+        this.addMouseListener(this);
     }
 
     /**
@@ -56,7 +60,7 @@ class GrundgeruestSwing extends JFrame implements ActionListener {
 
         openFile.addActionListener(this);
         saveFile.addActionListener(this);
-        
+
         fileMenu.addSeparator();
 
         fileMenu.add("Exit");
@@ -90,14 +94,12 @@ class GrundgeruestSwing extends JFrame implements ActionListener {
             System.exit(0);
         } else if (quelle == openFile) {
             openFile();
-        }
-        else if (quelle == saveFile) {
+        } else if (quelle == saveFile) {
             saveFile();
         }
 
     }
 
-  
     private void saveFile() {
 
         File datei = null;
@@ -105,7 +107,7 @@ class GrundgeruestSwing extends JFrame implements ActionListener {
 
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-         int returnVal = fc.showSaveDialog( this );
+        int returnVal = fc.showSaveDialog(this);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             datei = fc.getSelectedFile();
@@ -116,7 +118,6 @@ class GrundgeruestSwing extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, message);
         }
 
-            
     }
 
     /**
@@ -163,6 +164,34 @@ class GrundgeruestSwing extends JFrame implements ActionListener {
             message = new String("Aktion abgebrochen");
             JOptionPane.showMessageDialog(this, message);
         }
+
+    }
+
+    public void mouseClicked(MouseEvent e) {
+
+        String message = "Button: " + e.getButton() + "\n" + "X,Y: (" + e.getX() + ", " + e.getY() + ")\n"
+                + "X,Y on screen: (" + e.getXOnScreen() + ", " + e.getYOnScreen() + ")\n";
+        JOptionPane.showMessageDialog(this, message);
+
+    }
+
+    public void mousePressed(MouseEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void mouseEntered(MouseEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
 
     }
 
