@@ -40,7 +40,8 @@ class GrundgeruestSwing extends JFrame implements ActionListener, KeyListener, M
     private JLabel coordinates = new JLabel();
 
     private JLabel lblName = new JLabel("Name: ");
-    private JTextField txtName = new JTextField(20);
+    private JTextField txtName = new JTextField(12);
+    private JButton btnName = new JButton("Submit");
 
     public GrundgeruestSwing() {
         super(); // Konstruktor von JFrame
@@ -99,6 +100,9 @@ class GrundgeruestSwing extends JFrame implements ActionListener, KeyListener, M
         panel.add(new JSeparator());
         panel.add(txtName);
         txtName.addKeyListener(this);
+
+        btnName.setEnabled(false);
+        panel.add(btnName);
         return panel;
     }
 
@@ -249,8 +253,11 @@ class GrundgeruestSwing extends JFrame implements ActionListener, KeyListener, M
     }
 
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
 
+        if (txtName.getText().length() > 2)
+            btnName.setEnabled(true);
+        else
+            btnName.setEnabled(false);
     }
 
 }
