@@ -24,167 +24,182 @@ import de.htwberlin.prog2.ws1920.interior.Tisch;
 
 public class Starter {
 
-	private static Scanner scan = new Scanner(System.in);
-	private static Hotel motelOne;
+    private static Scanner scan = new Scanner(System.in);
+    private static Hotel motelOne;
+    private static IHotel partnerHotel;
 
-	public static void main(String[] args) {
-		// motelOne = new Hotel("Motel One");
-		try {
-			motelOne = Hotel.getInstance();
-		} catch (InvalidHotelStammdatenException exc) {
-			exc.printStackTrace();
-		}
+    public static void main(String[] args) {
+        // motelOne = new Hotel("Motel One");
+        partnerHotel = new PartnerHotelAdapter();
+        try {
+            motelOne = Hotel.getInstance();
+        } catch (InvalidHotelStammdatenException exc) {
+            exc.printStackTrace();
+        }
 
-		initHotel(motelOne);
-		makeSomeReservations(motelOne);
+        initHotel(motelOne);
+        makeSomeReservations(motelOne);
 
-		Office office = new Office("Off-102");
+        Office office = new Office("Off-102");
 
-		/*
-		Tisch tisch = new Konferenztisch();
-		Stuhl[] stuehle = {new Konferenzstuhl(), new Konferenzstuhl(), new Konferenzstuhl()};
-		Schrank schrank = new Bueroschrank();
-		 */
-		/*
-		 * Gefahr von Inkonsistenzen!!
-		Tisch tisch = new Esstisch();
-		Stuhl[] stuehle = {new Schreibtischstuhl(), new Konferenzstuhl(), new Esszimmerstuhl()};
-		Schrank schrank = new LuxusKleiderschrank();
-		 */
-		Einrichter officeEinrichter = new OfficeEinrichter();
-		Tisch tisch = officeEinrichter.createTisch();
-		Stuhl[] stuehle = officeEinrichter.createStuhle();
-		Schrank schrank = officeEinrichter.createSchrank();
-		
-		Ausstattung ausstattung = new Ausstattung(tisch , stuehle , schrank );
-		office.setAusstattung(ausstattung );
-		//stringSplitDemo();
+        /*
+         * Tisch tisch = new Konferenztisch(); Stuhl[] stuehle = {new Konferenzstuhl(),
+         * new Konferenzstuhl(), new Konferenzstuhl()}; Schrank schrank = new
+         * Bueroschrank();
+         */
+        /*
+         * Gefahr von Inkonsistenzen!! Tisch tisch = new Esstisch(); Stuhl[] stuehle =
+         * {new Schreibtischstuhl(), new Konferenzstuhl(), new Esszimmerstuhl()};
+         * Schrank schrank = new LuxusKleiderschrank();
+         */
+        Einrichter officeEinrichter = new OfficeEinrichter();
+        Tisch tisch = officeEinrichter.createTisch();
+        Stuhl[] stuehle = officeEinrichter.createStuhle();
+        Schrank schrank = officeEinrichter.createSchrank();
 
-		while (true) {
-			showMenue();
-			int choice = readUserInput();
-			processUserInput(choice);
-		}
-	}
+        Ausstattung ausstattung = new Ausstattung(tisch, stuehle, schrank);
+        office.setAusstattung(ausstattung);
+        // stringSplitDemo();
 
-	/**
-	 * 
-	 */
-	private static void stringSplitDemo() {
+        while (true) {
+            showMenue();
+            int choice = readUserInput();
+            processUserInput(choice);
+        }
+    }
 
-		String csvText1 = "100,HTW Berlin,14000";
+    /**
+     * 
+     */
+    private static void stringSplitDemo() {
 
-		System.out.println(csvText1);
-		String parts[] = csvText1.split(",");
-		for (String part : parts)
-			System.out.println(part);
+        String csvText1 = "100,HTW Berlin,14000";
 
-		System.out.println();
-		String csvText2 = "100;HTW Berlin;Treskowallee 8, 10318 Berlin";
+        System.out.println(csvText1);
+        String parts[] = csvText1.split(",");
+        for (String part : parts)
+            System.out.println(part);
 
-		System.out.println(csvText2);
-		String parts2[] = csvText2.split(";");
-		for (String part2 : parts2)
-			System.out.println(part2);
+        System.out.println();
+        String csvText2 = "100;HTW Berlin;Treskowallee 8, 10318 Berlin";
 
-		System.out.println();
+        System.out.println(csvText2);
+        String parts2[] = csvText2.split(";");
+        for (String part2 : parts2)
+            System.out.println(part2);
 
-	}
+        System.out.println();
 
-	private static void showMenue() {
+    }
 
-		String menuEntries[] = { "Alle Reservierungen zeigen",
-				"Alle Reservierungen eines Tages nach Gast sortieren und zeigen",
-				"Alle Kunden sortiert nach Punkte absteigend, nach Nachname aufsteigend zeigen",
-				"Alle Daten Exportieren", "Alle Daten Importieren", "Liste der Loyal Kunden als TXT Exportieren",
-				"Hotel Stammdaten von CSV Importieren",
-				"Eine Reservierung bei einem Partner erstellen",
-				"Ein Zimmer mit Fahrrad und Transfer buchen",
-				"Beenden" };
+    private static void showMenue() {
 
-		System.out.println("Menü");
-		System.out.println("=====");
+        String menuEntries[] = { "Alle Reservierungen zeigen",
+                "Alle Reservierungen eines Tages nach Gast sortieren und zeigen",
+                "Alle Kunden sortiert nach Punkte absteigend, nach Nachname aufsteigend zeigen",
+                "Alle Daten Exportieren", "Alle Daten Importieren", "Liste der Loyal Kunden als TXT Exportieren",
+                "Hotel Stammdaten von CSV Importieren", "Eine Reservierung bei einem Partner erstellen", "Reservierung mit Services erstellen", "Beenden" };
 
-		for (int i = 0; i < menuEntries.length; i++) {
-			System.out.println((i + 1) + ".\t" + menuEntries[i]);
-		}
+        System.out.println("Menü");
+        System.out.println("=====");
 
-	}
+        for (int i = 0; i < menuEntries.length; i++) {
+            System.out.println((i + 1) + ".\t" + menuEntries[i]);
+        }
 
-	private static int readUserInput() {
+    }
 
-		int choice = -1;
+    private static int readUserInput() {
 
-		System.out.print("Auswahl:" + "\t");
+        int choice = -1;
 
-		if (scan.hasNextLine()) {
-			String stringChoice = scan.nextLine();
-			try {
+        System.out.print("Auswahl:" + "\t");
 
-				choice = Integer.parseInt(stringChoice);
-			} catch (NumberFormatException nfe) {
-				System.err.println(nfe.getMessage());
-			}
-		}
-		System.out.println();
+        if (scan.hasNextLine()) {
+            String stringChoice = scan.nextLine();
+            try {
 
-		return choice;
-	}
+                choice = Integer.parseInt(stringChoice);
+            } catch (NumberFormatException nfe) {
+                System.err.println(nfe.getMessage());
+            }
+        }
+        System.out.println();
 
-	private static void processUserInput(int choice) {
+        return choice;
+    }
 
-		switch (choice) {
-		case 1:
-			showReservations();
-			break;
-		case 2:
-			showSortedReservations();
-			break;
-		case 3:
-			showSortedCustomers();
-			break;
-		case 4:
-			exportObject();
-			break;
-		case 5:
-			importObject();
-			break;
-		case 6:
-			loyalKundenExportieren();
-			break;
-		case 7:
-			hotelStammdatenCsvImport();
-			break;
+    private static void processUserInput(int choice) {
+
+        switch (choice) {
+        case 1:
+            showReservations();
+            break;
+        case 2:
+            showSortedReservations();
+            break;
+        case 3:
+            showSortedCustomers();
+            break;
+        case 4:
+            exportObject();
+            break;
+        case 5:
+            importObject();
+            break;
+        case 6:
+            loyalKundenExportieren();
+            break;
+        case 7:
+            hotelStammdatenCsvImport();
+            break;
         case 8:
             beimPartnerReservieren();
             break;
         case 9:
-            zimmerMitServicesBuchen();
-            break;            
-		case 10:
-			quitApp();
-			break;
-		default: {
-			System.out.println("Invalider Input!");
-			scan.reset();
-		}
+            reservierungMitServicesErstellen();
+            break;
+                        
+        case 10:
+            quitApp();
+            break;
+        default: {
+            System.out.println("Invalider Input!");
+            scan.reset();
+        }
 
-		}
-	}
+        }
+    }
 
+    /**
+     * 
+     */
+    private static void reservierungMitServicesErstellen() {
+       
+        IBuchbar zimmer = new Einzelzimmer("123");
+        
+        System.out.println(zimmer.getPrice());
+        
+        zimmer = new Fahrrad(zimmer, "F12");
+        System.out.println(zimmer.getPrice());
 
-    private static void zimmerMitServicesBuchen() {
-
-        System.out.println("Starter.zimmerMitServicesBuchen()");
+        zimmer = new Transfer(zimmer, "Flughafen");
+        
+        System.out.println(zimmer.getPrice());
+        
+        
+        
     }
 
     /**
      * 
      */
     private static void beimPartnerReservieren() {
-
-        System.out.println("Starter.beimPartnerReservieren()");
-
+        Guest guest = motelOne.getGuests().iterator().next();
+        LocalDateTime from = LocalDateTime.now();
+        LocalDateTime to = from.plusDays(3);
+        Reservation reservierung = partnerHotel.einZimmerBuchen(from, to, guest);
+        System.out.println(reservierung);
     }
 
     /**
@@ -262,7 +277,7 @@ public class Starter {
         System.out.println("Starter.showSortedReservations()");
 
         LocalDate day = readDate();
-//		List<Reservation> filteredReservations = filterReservations(motelOne.getReservations(), day);
+//      List<Reservation> filteredReservations = filterReservations(motelOne.getReservations(), day);
         Set<Reservation> filteredReservations = motelOne.getReservations(day);
 
         if (filteredReservations != null)
@@ -342,7 +357,8 @@ public class Starter {
         for (int i = 1; i < 21; i++)
             motelOne.addService(new Einzelzimmer("D" + i));
 
-        
+//        for (int i = 1; i < 20; i++)
+//            motelOne.addService(new Fahrrad("F" + i));
     }
 
 }
