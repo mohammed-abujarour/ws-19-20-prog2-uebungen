@@ -3,12 +3,13 @@ package de.htwberlin.prog2.ws1920;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Fahrrad implements IBuchbar, Serializable {
+public class Fahrrad extends Service implements Serializable {
 
 	private static final long serialVersionUID = 6962095595313604535L;
 	private String id;
 
-	public Fahrrad(String id) {
+	public Fahrrad(IBuchbar zimmer, String id) {
+	    super(zimmer);
 		this.id = id;
 	}
 
@@ -23,9 +24,9 @@ public class Fahrrad implements IBuchbar, Serializable {
 	public String getNummer() {
 		return id;
 	}
-
+	
     public double getPrice() {
-        return 3.5;
+        return getZimmer().getPrice() + 3.5;
     }
 
 }
