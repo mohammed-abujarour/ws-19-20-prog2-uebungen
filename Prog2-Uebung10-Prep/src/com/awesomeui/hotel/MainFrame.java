@@ -33,7 +33,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private JButton btnSortGuests;
     private JButton btnChangeDisplayName;
 
-    private JList<Guest> guestList;
+    private JList<GuestWrapper> guestList;
     private JRadioButton firstNameLastName;
     private JRadioButton lastNameFirstName;
 
@@ -72,7 +72,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
             public void actionPerformed(ActionEvent e) {
 
-                Guest selectedGuest = guestList.getSelectedValue();
+                GuestWrapper selectedGuest = guestList.getSelectedValue();
                 String guestString = "Bitte einen Gast auswälen";
                 if (selectedGuest != null)
                     guestString = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.GERMANY)
@@ -92,7 +92,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
  
     private void initGuestList() {
-        Guest guests[] = Backend.getHotel().getGuests().toArray(new Guest[] {});
+        GuestWrapper guests[] = Utils.buildGuestWrappers(Backend.getHotel().getGuests());//Backend.getHotel().getGuests().toArray(new Guest[] {});
         guestList = new JList<>(guests);
         guestList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         mainPanel.add(new JScrollPane(guestList));
@@ -128,7 +128,7 @@ public class MainFrame extends JFrame implements ActionListener {
             guestList.removeAll();
             List<Guest> guests = Backend.getHotel().getGuests();
             guests.sort(new GuestComparator());
-            guestList.setListData(guests.toArray(new Guest[] {}));
+            guestList.setListData(Utils.buildGuestWrappers(guests));
 
         } else if (sourceButton == btnChangeDisplayName) {
             System.out.println(firstNameLastName.isSelected());
