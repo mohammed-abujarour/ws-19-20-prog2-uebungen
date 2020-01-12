@@ -47,7 +47,6 @@ public class MainFrame extends JFrame implements ActionListener {
         getContentPane().add(mainPanel);
     }
 
- 
     private JPanel initMainPanel() {
 
         mainPanel = new JPanel();
@@ -64,7 +63,6 @@ public class MainFrame extends JFrame implements ActionListener {
 
         return mainPanel;
     }
-
 
     private void initGuestDetailsButton() {
         JButton guestDetails = new JButton("Gastdetails zeigen");
@@ -83,29 +81,26 @@ public class MainFrame extends JFrame implements ActionListener {
         mainPanel.add(guestDetails);
     }
 
- 
     private void initSortButton() {
         btnSortGuests = new JButton("Gästeliste sortieren");
         btnSortGuests.addActionListener(this);
         mainPanel.add(btnSortGuests);
     }
 
- 
     private void initGuestList() {
-        GuestWrapper guests[] = Utils.buildGuestWrappers(Backend.getHotel().getGuests());//Backend.getHotel().getGuests().toArray(new Guest[] {});
+        GuestWrapper guests[] = Utils.buildGuestWrappers(Backend.getHotel().getGuests());// Backend.getHotel().getGuests().toArray(new
+                                                                                         // Guest[] {});
         guestList = new JList<>(guests);
         guestList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         mainPanel.add(new JScrollPane(guestList));
     }
 
-   
     private void initDisplayOptionsButton() {
         btnChangeDisplayName = new JButton("Liste aktualisieren");
         btnChangeDisplayName.addActionListener(this);
         mainPanel.add(btnChangeDisplayName);
     }
 
-  
     private void initDisplayOptions() {
         firstNameLastName = new JRadioButton("Vorname Nachname", true);
         lastNameFirstName = new JRadioButton("Nachname, Vorname");
@@ -131,8 +126,21 @@ public class MainFrame extends JFrame implements ActionListener {
             guestList.setListData(Utils.buildGuestWrappers(guests));
 
         } else if (sourceButton == btnChangeDisplayName) {
-            System.out.println(firstNameLastName.isSelected());
-            System.out.println(lastNameFirstName.isSelected());
+            guestList.removeAll();
+            List<Guest> guests = Backend.getHotel().getGuests();
+            GuestWrapper[] guestWrappers = Utils.buildGuestWrappers(guests);
+
+            if (firstNameLastName.isSelected()) {
+                for (GuestWrapper guestWrapper : guestWrappers) {
+                    guestWrapper.setNameFormatStrategy(new FirstNameLastName());
+                }
+            } else if (lastNameFirstName.isSelected()) {
+                for (GuestWrapper guestWrapper : guestWrappers) {
+                    guestWrapper.setNameFormatStrategy(new LastNameFirstName());
+                }
+            }
+            guestList.setListData(guestWrappers);
+
         }
 
     }

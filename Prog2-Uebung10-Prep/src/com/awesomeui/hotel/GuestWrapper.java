@@ -11,19 +11,26 @@ import de.htwberlin.prog2.ws1920.Guest;
  */
 public class GuestWrapper {
     private Guest guest;
-    
+    private NameFormatStrategy nameFormatStrategy;
+
     public GuestWrapper(Guest guest) {
         this.guest = guest;
+        nameFormatStrategy = new FirstNameLastName();
     }
-    
+
+    public void setNameFormatStrategy(NameFormatStrategy strategy) {
+        this.nameFormatStrategy = strategy;
+    }
+
     public String toString() {
-        return guest.getFirstName() + " " + guest.getLastName();
+//        return guest.getFirstName() + " " + guest.getLastName();
+        return nameFormatStrategy.display(guest);
     }
-    
+
     public Date getBirthDate() {
         return guest.getBirthDate();
     }
-    
+
     public Address getPrivateAdresse() {
         return guest.getPrivateAdresse();
     }
