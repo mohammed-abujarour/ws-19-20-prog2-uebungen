@@ -1,13 +1,17 @@
 package de.htwberlin.prog2;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -16,13 +20,106 @@ import javax.swing.JPanel;
  */
 public class MyFrame extends JFrame {
 
+    private Font font = new Font("Serif", Font.BOLD, 60);
+
     public MyFrame() {
         super("Swing macht Spaß!");
         this.setSize(800, 600);
         centerWindowOnScreen();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel mainPanel = gridLayout();
+        JPanel mainPanel = borderLayout();
         this.getContentPane().add(mainPanel);
+    }
+
+    /**
+     * @return
+     */
+    private JPanel borderLayout() {
+
+        this.setTitle(this.getTitle() + " BorderLayout");
+        JPanel panel = new JPanel(new BorderLayout());
+
+        JPanel topPanel = createTopPanel();
+        panel.add(topPanel, BorderLayout.NORTH);
+
+        JPanel leftPanel = createLeftPanel();
+        panel.add(leftPanel, BorderLayout.WEST);
+
+        JPanel mainPanel = createMiddlePanel();
+        panel.add(mainPanel, BorderLayout.CENTER);
+
+        JPanel rightPanel = createRightPanel();
+        panel.add(rightPanel, BorderLayout.EAST);
+
+        JPanel bottomPanel = createBottomPanel();
+        panel.add(bottomPanel, BorderLayout.SOUTH);
+
+        return panel;
+    }
+
+    /**
+     * @return
+     */
+    private JPanel createBottomPanel() {
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(255, 251, 121));
+        JLabel label = new JLabel("Bottom ");
+        label.setFont(font);
+        panel.add(label);
+
+        return panel;
+    }
+
+    /**
+     * @return
+     */
+    private JPanel createRightPanel() {
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(118, 214, 255));
+        JLabel label = new JLabel("Right ");
+        label.setFont(font);
+        panel.add(label);
+
+        return panel;
+    }
+
+    /**
+     * @return
+     */
+    private JPanel createMiddlePanel() {
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(255, 212, 121));
+        JLabel label = new JLabel("Center ");
+        label.setFont(font);
+        panel.add(label);
+
+        return panel;
+    }
+
+    /**
+     * @return
+     */
+    private JPanel createLeftPanel() {
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(0.8f, 0.4f, 0.6f, 0.8f));
+        JLabel label = new JLabel("West ");
+        label.setFont(font);
+        panel.add(label);
+
+        return panel;
+    }
+
+    /**
+     * @return
+     */
+    private JPanel createTopPanel() {
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(111999));
+        JLabel label = new JLabel("North ");
+        label.setFont(font);
+        panel.add(label);
+
+        return panel;
     }
 
     /**
@@ -34,13 +131,13 @@ public class MyFrame extends JFrame {
         JPanel panel = new JPanel();
         for (int i = 1; i < 11; i++)
             panel.add(new JButton("Button " + i));
-        
-        int rows = 5; //3;
-        int cols = 2; //3;
+
+        int rows = 5; // 3;
+        int cols = 2; // 3;
         int hgap = 20;
         int vgap = 10;
         LayoutManager gridLayout = new GridLayout(rows, cols, hgap, vgap);
-        panel.setLayout(gridLayout );
+        panel.setLayout(gridLayout);
         return panel;
     }
 
