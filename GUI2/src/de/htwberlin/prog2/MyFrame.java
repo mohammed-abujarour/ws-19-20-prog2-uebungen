@@ -2,6 +2,8 @@ package de.htwberlin.prog2;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
@@ -19,8 +21,25 @@ public class MyFrame extends JFrame {
         this.setSize(800, 600);
         centerWindowOnScreen();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel mainPanel = flowLayout();
+        JPanel mainPanel = gridLayout();
         this.getContentPane().add(mainPanel);
+    }
+
+    /**
+     * @return
+     */
+    private JPanel gridLayout() {
+
+        this.setTitle(this.getTitle() + " GridLayout");
+        JPanel panel = new JPanel();
+        for (int i = 1; i < 11; i++)
+            panel.add(new JButton("Button " + i));
+        
+        int rows = 5; //3;
+        int cols = 2; //3;
+        LayoutManager gridLayout = new GridLayout(rows, cols);
+        panel.setLayout(gridLayout );
+        return panel;
     }
 
     private JPanel defaultLayout() {
