@@ -37,7 +37,9 @@ public class MyFrame extends JFrame {
         
         int rows = 5; //3;
         int cols = 2; //3;
-        LayoutManager gridLayout = new GridLayout(rows, cols);
+        int hgap = 20;
+        int vgap = 10;
+        LayoutManager gridLayout = new GridLayout(rows, cols, hgap, vgap);
         panel.setLayout(gridLayout );
         return panel;
     }
