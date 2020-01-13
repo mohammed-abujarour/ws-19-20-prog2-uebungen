@@ -1,6 +1,7 @@
 package de.htwberlin.prog2;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
@@ -18,16 +19,30 @@ public class MyFrame extends JFrame {
         this.setSize(800, 600);
         centerWindowOnScreen();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel mainPanel = defaultLayout();
+        JPanel mainPanel = flowLayout();
         this.getContentPane().add(mainPanel);
     }
 
-
     private JPanel defaultLayout() {
 
+        this.setTitle(this.getTitle() + " Default Layout");
         JPanel panel = new JPanel();
-        for(int i=1; i< 11; i++)
+        for (int i = 1; i < 11; i++)
             panel.add(new JButton("Button " + i));
+        return panel;
+    }
+
+    private JPanel flowLayout() {
+
+        this.setTitle(this.getTitle() + " Flow Layout");
+        JPanel panel = new JPanel();
+        for (int i = 1; i < 11; i++)
+            panel.add(new JButton("Button " + i));
+
+        int align = FlowLayout.LEFT;
+        int hgap = 30;
+        int vgap = 30;
+        panel.setLayout(new FlowLayout(align, hgap, vgap));
         return panel;
     }
 
@@ -40,6 +55,6 @@ public class MyFrame extends JFrame {
         int y = (int) ((screenDimensions.getHeight() - this.getHeight()) / 2);
 
         this.setLocation(x, y);
-    
+
     }
 }
