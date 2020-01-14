@@ -1,4 +1,5 @@
 
+
 /**
  * @author Mohammed AbuJarour (mohammed.abujarour@htw-berlin.de)
  *
@@ -12,6 +13,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.Random;
 
@@ -27,7 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
-class GrundgeruestSwing extends JFrame implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
+class GrundgeruestSwing extends JFrame implements ActionListener, KeyListener, MouseListener, MouseMotionListener, WindowListener {
 
     private JButton klickMichbutton = new JButton("Klick mich"); // Button erzeugen
     private JButton endeButton = new JButton("Ende"); // Button erzeugen
@@ -55,7 +58,10 @@ class GrundgeruestSwing extends JFrame implements ActionListener, KeyListener, M
         this.getContentPane().add(coordinates, BorderLayout.SOUTH);
         createMenu();
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Klick auf x
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Klick auf x
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(this);
+
 
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
@@ -258,6 +264,48 @@ class GrundgeruestSwing extends JFrame implements ActionListener, KeyListener, M
             btnName.setEnabled(true);
         else
             btnName.setEnabled(false);
+    }
+
+    public void windowOpened(WindowEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void windowClosing(WindowEvent e) {
+         int answer = JOptionPane.showConfirmDialog(this, "Programm wirklich beenden?");
+        
+        if(answer==JOptionPane.YES_OPTION)
+        {
+            this.setVisible(false);
+            this.dispose();
+            System.exit(0);
+        }
+        
+    }
+
+    public void windowClosed(WindowEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void windowIconified(WindowEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void windowDeiconified(WindowEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void windowActivated(WindowEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void windowDeactivated(WindowEvent e) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
