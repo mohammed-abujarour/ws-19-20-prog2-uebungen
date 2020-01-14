@@ -13,8 +13,13 @@ public class Starter {
      * @param args
      */
     public static void main(String[] args) {
+
         Hotel hotel = Backend.getHotel();
-        // Frame etc.
+        
+        MainFrame mainFrame = new MainFrame(hotel.getName());
+        
+        mainFrame.setVisible(true);
+
     }
 
 }
