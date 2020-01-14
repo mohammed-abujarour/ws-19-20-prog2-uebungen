@@ -2,11 +2,13 @@ package de.htwberlin.prog2;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
@@ -39,8 +41,13 @@ public class MyFrame extends JFrame {
         this.setTitle(this.getTitle() + " Null Layout");
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        for (int i = 1; i < 11; i++)
-            panel.add(new JButton("Button " + i));
+        for (int i = 1; i < 11; i++) {
+            Component component = new JButton("Button " + i);
+//            component.setLocation(i*35, i*35);
+//            component.setSize(100, 30);
+            component.setBounds(new Rectangle(i*35, i*35, 100, 30));
+            panel.add(component);
+        }
         return panel;
     }
 
