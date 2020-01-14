@@ -6,6 +6,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.Rectangle;
@@ -15,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  * @author Mohammed AbuJarour (mohammed.abujarour@htw-berlin.de)
@@ -29,8 +33,57 @@ public class MyFrame extends JFrame {
         this.setSize(800, 600);
         centerWindowOnScreen();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel mainPanel = nullLayout();
+        JPanel mainPanel = gridBagLayout();
         this.getContentPane().add(mainPanel);
+    }
+
+    /**
+     * @return
+     */
+    private JPanel gridBagLayout() {
+
+        this.setTitle(this.getTitle() + " GridBag Layout");
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+
+        JLabel lblUserName = new JLabel("Username");
+        JLabel lblPassword  = new JLabel("Password");
+        
+        JTextField txtUserName = new JTextField(20);
+        JPasswordField txtPassword = new JPasswordField(20);
+        
+        JButton btnSubmit = new JButton("Submit");
+        JButton btnCancel = new JButton("Cancel");
+        
+        GridBagConstraints constraint = new GridBagConstraints();
+        constraint.ipadx = 5;
+        constraint.ipady = 5;   
+        
+        constraint.gridx = 0;
+        constraint.gridy = 0;
+        panel.add(lblUserName, constraint);
+        
+        constraint.gridx = 1;
+        constraint.gridy = 0;
+        panel.add(txtUserName, constraint);
+        
+        constraint.gridx = 0;
+        constraint.gridy = 1;
+        panel.add(lblPassword, constraint);
+
+        constraint.gridx = 1;
+        constraint.gridy = 1;
+        panel.add(txtPassword, constraint);
+
+        constraint.gridx = 1;
+        constraint.gridy = 2;
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(btnCancel);
+        buttonPanel.add(btnSubmit);
+        panel.add(buttonPanel, constraint);
+
+        
+        return panel;
     }
 
     /**
@@ -43,8 +96,8 @@ public class MyFrame extends JFrame {
         panel.setLayout(null);
         for (int i = 1; i < 11; i++) {
             Component component = new JButton("Button " + i);
-//            component.setLocation(i*35, i*35);
-//            component.setSize(100, 30);
+            component.setLocation(i*35, i*35);
+            component.setSize(100, 30);
             component.setBounds(new Rectangle(i*35, i*35, 100, 30));
             panel.add(component);
         }
