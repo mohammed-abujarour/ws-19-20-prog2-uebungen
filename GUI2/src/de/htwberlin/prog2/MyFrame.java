@@ -27,8 +27,21 @@ public class MyFrame extends JFrame {
         this.setSize(800, 600);
         centerWindowOnScreen();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel mainPanel = borderLayout();
+        JPanel mainPanel = nullLayout();
         this.getContentPane().add(mainPanel);
+    }
+
+    /**
+     * @return
+     */
+    private JPanel nullLayout() {
+
+        this.setTitle(this.getTitle() + " Null Layout");
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        for (int i = 1; i < 11; i++)
+            panel.add(new JButton("Button " + i));
+        return panel;
     }
 
     /**
