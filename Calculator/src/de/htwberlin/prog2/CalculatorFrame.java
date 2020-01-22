@@ -17,6 +17,8 @@ import javax.swing.JTextField;
  */
 public class CalculatorFrame extends JFrame implements ActionListener {
 
+    private JTextField txtNumber;
+    
     public CalculatorFrame() {
         super();
         this.setSize(150, 250);
@@ -49,7 +51,7 @@ public class CalculatorFrame extends JFrame implements ActionListener {
     private JPanel initTopPanel() {
         JPanel panel = new JPanel();
 
-        JTextField txtNumber = new JTextField(10);
+        txtNumber = new JTextField(10);
         txtNumber.setHorizontalAlignment(JTextField.RIGHT);
         txtNumber.setEditable(false);
         panel.add(txtNumber);
@@ -65,7 +67,8 @@ public class CalculatorFrame extends JFrame implements ActionListener {
         JButton sourceButton = (JButton) source;
         String label = sourceButton.getText();
         if (isNumber(label))
-            System.out.println(label);
+            txtNumber.setText(txtNumber.getText()+label);
+
 
     }
 
