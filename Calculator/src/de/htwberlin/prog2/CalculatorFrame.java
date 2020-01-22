@@ -17,6 +17,7 @@ import javax.swing.text.BadLocationException;
  * @author Mohammed AbuJarour (mohammed.abujarour@htw-berlin.de)
  *
  */
+@SuppressWarnings("serial")
 public class CalculatorFrame extends JFrame implements ActionListener {
 
     private JTextField txtNumber;
@@ -31,7 +32,8 @@ public class CalculatorFrame extends JFrame implements ActionListener {
         this.setSize(150, 250);
         this.setLocation(200, 150);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        this.setResizable(false);
+        
         JPanel topPanel = initTopPanel();
         JPanel mainPanel = initMainPanel();
 
@@ -89,31 +91,35 @@ public class CalculatorFrame extends JFrame implements ActionListener {
                 txtNumber.setText(txtNumber.getText(0, txtNumber.getText().length() - 1));
             } catch (BadLocationException exc) {
             }
+        } else if (label.equals(labels[labels.length - 2])) {
+            double currentNumber = text2Number(txtNumber.getText());
+            if (currentNumber != 0) {
+                currentNumber *= -1;
+                txtNumber.setText(currentNumber + "");
+            }
+        } else if (label.equals(labels[labels.length - 1])) {
+
+            if (txtNumber.getText().length() != 0) {
+                double secondOperand = text2Number(txtNumber.getText());
+                if (operation.equals(labels[3]))
+                    number += secondOperand;
+                else if (operation.equals(labels[7]))
+                    number -= secondOperand;
+                else if (operation.equals(labels[11]))
+                    number *= secondOperand;
+                else if (operation.equals(labels[15]))
+                    number /= secondOperand;
+
+                txtNumber.setText(number + "");
+                readNextOperand = true;
+
+                operation = "";
+            }
+
         }
-
-        else if (label.equals(labels[labels.length - 1])) {
-
-            double secondOperand = text2Number(txtNumber.getText());
-            if (operation.equals(labels[3]))
-                number += secondOperand;
-            else if (operation.equals(labels[7]))
-                number -= secondOperand;
-            else if (operation.equals(labels[11]))
-                number *= secondOperand;
-            else if (operation.equals(labels[15]))
-                number /= secondOperand;
-
-            txtNumber.setText(number + "");
-            readNextOperand = true;
-
-        }
-
     }
 
-    /**
-     * @param label
-     * @return
-     */
+
     private double text2Number(String label) {
         try {
             return Double.parseDouble(label);
@@ -122,10 +128,6 @@ public class CalculatorFrame extends JFrame implements ActionListener {
         }
     }
 
-    /**
-     * @param label
-     * @return
-     */
     private boolean isOperation(String label) {
         String operations[] = { labels[2], labels[3], labels[7], labels[11], labels[15] };
 
