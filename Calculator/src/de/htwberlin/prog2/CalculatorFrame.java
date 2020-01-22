@@ -42,7 +42,7 @@ public class CalculatorFrame extends JFrame implements ActionListener {
             button.addActionListener(this);
             panel.add(button);
         }
-        
+
         return panel;
     }
 
@@ -58,12 +58,24 @@ public class CalculatorFrame extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        
+
         Object source = e.getSource();
-        if(!(source instanceof JButton))
+        if (!(source instanceof JButton))
             return;
         JButton sourceButton = (JButton) source;
-        System.out.println(sourceButton.getText());
-        
+        String label = sourceButton.getText();
+        if (isNumber(label))
+            System.out.println(label);
+
+    }
+
+    private boolean isNumber(String label) {
+
+        try {
+            Double.parseDouble(label);
+        } catch (Exception exc) {
+            return false;
+        }
+        return true;
     }
 }
