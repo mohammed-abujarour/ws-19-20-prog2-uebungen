@@ -38,7 +38,6 @@ public class CalculatorFrame extends JFrame {
         for (String label : labels)
             panel.add(new JButton(label));
         
-        panel.setBackground(new Color(231, 255, 190));
         return panel;
     }
 
@@ -50,7 +49,6 @@ public class CalculatorFrame extends JFrame {
         txtNumber.setEditable(false);
         panel.add(txtNumber);
 
-        panel.setBackground(new Color(179, 215, 255));
         return panel;
     }
 }
