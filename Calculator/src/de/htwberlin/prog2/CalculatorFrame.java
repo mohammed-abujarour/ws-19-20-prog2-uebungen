@@ -3,6 +3,8 @@ package de.htwberlin.prog2;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,7 +15,7 @@ import javax.swing.JTextField;
  * @author Mohammed AbuJarour (mohammed.abujarour@htw-berlin.de)
  *
  */
-public class CalculatorFrame extends JFrame {
+public class CalculatorFrame extends JFrame implements ActionListener {
 
     public CalculatorFrame() {
         super();
@@ -35,8 +37,11 @@ public class CalculatorFrame extends JFrame {
         panel.setLayout(new GridLayout(5, 4));
         String labels[] = { "\u2190", "C", "%", "+", "7", "8", "9", "-", "4", "5", "6", "*", "1", "2", "3", "/", "0",
                 ".", "±", "=" };
-        for (String label : labels)
-            panel.add(new JButton(label));
+        for (String label : labels) {
+            JButton button = new JButton(label);
+            button.addActionListener(this);
+            panel.add(button);
+        }
         
         return panel;
     }
@@ -50,5 +55,15 @@ public class CalculatorFrame extends JFrame {
         panel.add(txtNumber);
 
         return panel;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        
+        Object source = e.getSource();
+        if(!(source instanceof JButton))
+            return;
+        JButton sourceButton = (JButton) source;
+        System.out.println(sourceButton.getText());
+        
     }
 }
