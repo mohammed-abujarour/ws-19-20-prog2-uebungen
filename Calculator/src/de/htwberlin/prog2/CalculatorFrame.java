@@ -5,6 +5,7 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * @author Mohammed AbuJarour (mohammed.abujarour@htw-berlin.de)
@@ -35,8 +36,13 @@ public class CalculatorFrame extends JFrame {
 
 
     private JPanel initTopPanel() {
-        
         JPanel panel = new JPanel();
+        
+        JTextField txtNumber = new JTextField(10);
+        txtNumber.setHorizontalAlignment(JTextField.RIGHT);
+        txtNumber.setEditable(false);
+        panel.add(txtNumber);
+        
         panel.setBackground(new Color(179,215,255));
         return panel;
     }
