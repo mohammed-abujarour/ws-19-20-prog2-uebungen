@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.BadLocationException;
 
 /**
  * @author Mohammed AbuJarour (mohammed.abujarour@htw-berlin.de)
@@ -18,7 +19,8 @@ import javax.swing.JTextField;
 public class CalculatorFrame extends JFrame implements ActionListener {
 
     private JTextField txtNumber;
-    
+    private final String labels[] = { "\u2190", "C", "%", "+", "7", "8", "9", "-", "4", "5", "6", "*", "1", "2", "3", "/", "0",
+            ".", "±", "=" };    
     public CalculatorFrame() {
         super();
         this.setSize(150, 250);
@@ -37,8 +39,7 @@ public class CalculatorFrame extends JFrame implements ActionListener {
         JPanel panel = new JPanel();
 
         panel.setLayout(new GridLayout(5, 4));
-        String labels[] = { "\u2190", "C", "%", "+", "7", "8", "9", "-", "4", "5", "6", "*", "1", "2", "3", "/", "0",
-                ".", "±", "=" };
+
         for (String label : labels) {
             JButton button = new JButton(label);
             button.addActionListener(this);
@@ -68,6 +69,16 @@ public class CalculatorFrame extends JFrame implements ActionListener {
         String label = sourceButton.getText();
         if (isNumber(label))
             txtNumber.setText(txtNumber.getText()+label);
+        else {
+            if(label.equals(labels[1]))
+                txtNumber.setText("");
+            else if(label.equals(labels[0])) {
+                try {
+                    txtNumber.setText(txtNumber.getText(0,txtNumber.getText().length()-1));
+                } catch (BadLocationException exc) {
+                }
+            }
+        }
 
 
     }
