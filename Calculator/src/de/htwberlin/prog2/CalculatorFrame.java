@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +22,9 @@ public class CalculatorFrame extends JFrame implements ActionListener {
     private JTextField txtNumber;
     private final String labels[] = { "\u2190", "C", "%", "+", "7", "8", "9", "-", "4", "5", "6", "*", "1", "2", "3", "/", "0",
             ".", "±", "=" };    
+    private double number;
+    private boolean readNextOperand = false;
+    
     public CalculatorFrame() {
         super();
         this.setSize(150, 250);
@@ -67,8 +71,18 @@ public class CalculatorFrame extends JFrame implements ActionListener {
             return;
         JButton sourceButton = (JButton) source;
         String label = sourceButton.getText();
-        if (isNumber(label))
-            txtNumber.setText(txtNumber.getText()+label);
+        if (isNumber(label)) {
+            if(readNextOperand) {
+                txtNumber.setText(label);
+                readNextOperand = false;
+            }
+            else
+                txtNumber.setText(txtNumber.getText()+label);
+        }
+        else if(isOperation(label)) {
+            number = text2Number(label);
+            readNextOperand = true;
+        }
         else {
             if(label.equals(labels[1]))
                 txtNumber.setText("");
@@ -81,6 +95,29 @@ public class CalculatorFrame extends JFrame implements ActionListener {
         }
 
 
+    }
+
+    /**
+     * @param label
+     * @return
+     */
+    private double text2Number(String label) {
+        try {
+            return Double.parseDouble(label);
+        }
+        catch (Exception exc) {
+            return 0;
+        }
+    }
+
+    /**
+     * @param label
+     * @return
+     */
+    private boolean isOperation(String label) {
+        String operations [] = {labels[2], labels[3], labels[7], labels[11], labels[15]};
+        
+        return Arrays.asList(operations).contains(label);
     }
 
     private boolean isNumber(String label) {
